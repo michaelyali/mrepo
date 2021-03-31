@@ -6,6 +6,9 @@
   "bin": {
     "mrepo": "bin/mrepo.js"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/zMotivat0r/mrepo.git"
