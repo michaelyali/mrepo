@@ -1,0 +1,19 @@
+{
+  "workspace": {
+    "name": "<%= workspaceName %>",
+    "scope": "<%= scope %>",
+    "packages": []
+  },
+  "packageGenerator": {
+    "subGenerators": [],
+    "defaultOptions": {
+      "access": "<%= pgDefaultsAccess %>",
+      "license": "<%= pgDefaultsLicense %>",
+      "authorName": "<%= pgDefaultsAuthorName %>",
+      "authorEmail": "<%= pgDefaultsAuthorEmail %>",
+      "updateTsconfig": true,
+      "subGenerators": [],
+      "dependencies": []
+    }
+  }
+}

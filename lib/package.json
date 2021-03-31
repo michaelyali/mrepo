@@ -1,0 +1,50 @@
+{
+  "name": "@zmotivat0r/mrepo",
+  "version": "0.0.0",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "bin": {
+    "mrepo": "bin/mrepo.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zMotivat0r/mrepo.git"
+  },
+  "keywords": [
+    "avascript",
+    "cli",
+    "typescript",
+    "tools",
+    "generator",
+    "scaffold",
+    "npm-package",
+    "lerna",
+    "monorepo",
+    "build-tool",
+    "npm-scripts",
+    "monorepos",
+    "monorepository",
+    "lerna-monorepo"
+  ],
+  "author": {
+    "name": "Michael Yali",
+    "email": "mihon4ik@gmail.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zMotivat0r/mrepo/issues"
+  },
+  "homepage": "https://github.com/zMotivat0r/mrepo#readme",
+  "dependencies": {
+    "@nestled/util": "2.3.8",
+    "ajv": "7.2.1",
+    "chalk": "4.1.0",
+    "commander": "7.1.0",
+    "dashify": "2.0.0",
+    "json": "10.0.0",
+    "node-emoji": "1.10.0",
+    "npmlog": "4.1.2",
+    "rimraf": "3.0.2",
+    "sao": "1.7.1"
+  }
+}

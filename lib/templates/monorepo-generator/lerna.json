@@ -1,0 +1,11 @@
+{
+  "packages": ["<%= workspaceName %>/*"],
+  "npmClient": "yarn",
+  "useWorkspaces": true,
+  "version": "<%= lernaPackageVersioning %>",
+  "command": {
+    "publish": {
+      "message": "<%= publishPackageCommitMsg %>"
+    }
+  }
+}

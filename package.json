@@ -1,0 +1,66 @@
+{
+  "name": "monorepo-utils",
+  "description": "Monorepo utils",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "build": "npx tsc -b tsconfig.build.json",
+    "postbuild": "cpy ./templates/**/* ./lib --parents",
+    "bump": "npx bump package.json package-lock.json lib/package.json --ignore-scripts",
+    "changelog": "conventional-changelog -i CHANGELOG.md -s -r 0",
+    "clean": "npx rimraf \"./lib/!(.npmrc|LICENSE|package.json|README.md)**\"",
+    "cm": "git-cz",
+    "lib:link": "cd ./lib && npm link",
+    "lib:try": "yarn build && yarn lib:unlink && yarn lib:link",
+    "lib:unlink": "cd ./lib && npm unlink",
+    "prebuild": "npm run clean",
+    "prerelease": "yarn build && yarn test",
+    "release": "yarn bump && yarn changelog",
+    "postrelease": "sh ./scripts/post-release.sh",
+    "test": "npx jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alloyify/monorepo-utils.git"
+  },
+  "keywords": [],
+  "author": {
+    "name": "Michael Yali",
+    "email": "mihon4ik@gmail.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alloyify/monorepo-utils/issues"
+  },
+  "homepage": "https://github.com/alloyify/monorepo-utils#readme",
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    }
+  },
+  "devDependencies": {
+    "@types/jest": "26.0.20",
+    "@types/jsesc": "2.5.1",
+    "@types/node": "14.14.33",
+    "commitizen": "4.2.3",
+    "conventional-changelog-cli": "2.1.1",
+    "cpy-cli": "3.1.1",
+    "cz-conventional-changelog": "3.3.0",
+    "jest": "26.6.3",
+    "ts-jest": "26.5.3",
+    "typescript": "3.9.9",
+    "version-bump-prompt": "6.1.0"
+  },
+  "dependencies": {
+    "@nestled/util": "2.3.8",
+    "ajv": "7.2.1",
+    "chalk": "4.1.0",
+    "commander": "7.1.0",
+    "dashify": "2.0.0",
+    "json": "10.0.0",
+    "node-emoji": "1.10.0",
+    "npmlog": "4.1.2",
+    "rimraf": "3.0.2",
+    "sao": "1.7.1"
+  }
+}

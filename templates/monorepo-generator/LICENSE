@@ -1,0 +1,3 @@
+(The <%= pgDefaultsLicense %> License)
+
+Copyright (c) <%= currentYear %> <%= pgDefaultsAuthorName %> <<%= pgDefaultsAuthorEmail %>>

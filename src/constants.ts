@@ -1,0 +1,3 @@
+export const CMD = 'mrepo';
+export const CONFIG_FILE_NAME = `${CMD}.json`;
+export const PACKAGE_GENERATOR_PASSED_OPTIONS_ENV_VAR = 'PACKAGE_GENERATOR_PASSED_OPTIONS';
