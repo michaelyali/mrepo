@@ -1,5 +1,12 @@
+## <small>0.1.4 (2021-03-31)</small>
+
+* ci(github): hopfully fixed release-trigger action ([059cba9](https://github.com/alloyify/monorepo-utils/commit/059cba9))
+
+
+
 ## <small>0.1.3 (2021-03-31)</small>
 
+* chore: release 0.1.3 ([fdc30d6](https://github.com/alloyify/monorepo-utils/commit/fdc30d6))
 * ci(github): updated release-trigger action ([f743456](https://github.com/alloyify/monorepo-utils/commit/f743456))
 
 
