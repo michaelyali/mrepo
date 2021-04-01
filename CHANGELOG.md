@@ -1,5 +1,12 @@
+## <small>0.1.5 (2021-04-01)</small>
+
+* docs: updated readme ([e25fe76](https://github.com/alloyify/monorepo-utils/commit/e25fe76))
+
+
+
 ## <small>0.1.4 (2021-03-31)</small>
 
+* chore: release 0.1.4 ([2842e0d](https://github.com/alloyify/monorepo-utils/commit/2842e0d))
 * ci(github): hopfully fixed release-trigger action ([059cba9](https://github.com/alloyify/monorepo-utils/commit/059cba9))
 
 
