@@ -1,1 +1,1 @@
-# Awesome Monorepo Generator
+# Awesome Monorepo Generator and more
