@@ -8,14 +8,16 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Install
+      - name: Set npm token
         uses: actions/setup-node@v2
         with:
           node-version: '12.x'
           registry-url: https://registry.npmjs.org
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - run: npm install
+
+      - name: Install
+        run: npm install
 
       - name: Build
         run: npm run build
