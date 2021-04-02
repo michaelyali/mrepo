@@ -2,6 +2,7 @@
   "workspace": {
     "name": "<%= workspaceName %>",
     "scope": "<%= scope %>",
+    "registry": "<%= packageRegistry %>",
     "packages": []
   },
   "packageGenerator": {

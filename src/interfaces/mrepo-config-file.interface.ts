@@ -4,6 +4,7 @@ export interface IMrepoConfigFile {
   workspace: {
     name: string;
     scope: string;
+    registry: string;
     packages: Array<{
       name: string;
     }>;

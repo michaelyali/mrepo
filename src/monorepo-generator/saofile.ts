@@ -3,19 +3,15 @@ import { existsSync, mkdirSync } from 'fs';
 import { join } from 'path';
 import * as color from 'chalk';
 import * as emoji from 'node-emoji';
+import {
+  GITHUB_NODE_AUTH_TOKEN_NAME,
+  LERNA_PACKAGES_VERSIONING,
+  PACKAGE_REGISTRY,
+  PACKAGE_REGISTRY_URL,
+} from '../constants';
 import { getParentProcessPassedOptions } from '../helpers';
 import { logger } from '../utils';
 import { IMonorepoGeneratorAnswers, IParentCommandPassedOptions } from './interfaces';
-
-enum LERNA_PACKAGES_VERSIONING {
-  independent = 'independent',
-  common = 'common',
-}
-
-enum PACKAGE_REGISTRY {
-  github = 'github',
-  npm = 'npm',
-}
 
 const LERNA_PACKAGES_VERSIONING_CHOICES = [
   {
@@ -58,6 +54,8 @@ const defaultAnswers: IMonorepoGeneratorAnswers = {
   packageRegistry: PACKAGE_REGISTRY.github,
   shouldGeneratePackage: false,
   firstPackageName: '',
+  registryUrl: PACKAGE_REGISTRY_URL.github,
+  githubNodeAuthTokenName: GITHUB_NODE_AUTH_TOKEN_NAME.github,
 };
 
 // check folder exists
@@ -171,12 +169,20 @@ const result = {
       this.answers.lernaPackageVersioning = defaultAnswers.lernaPackageVersioning;
       this.answers.packageRegistry = defaultAnswers.packageRegistry;
       this.answers.shouldGeneratePackage = defaultAnswers.shouldGeneratePackage;
+      this.answers.registryUrl = defaultAnswers.registryUrl;
+      this.answers.githubNodeAuthTokenName = defaultAnswers.githubNodeAuthTokenName;
     }
 
     this.answers.lernaPackageVersioning =
       this.answers.lernaPackageVersioning === LERNA_PACKAGES_VERSIONING.independent
         ? LERNA_PACKAGES_VERSIONING.independent
         : '0.0.0';
+    this.answers.registryUrl =
+      this.answers.packageRegistry === PACKAGE_REGISTRY.github ? PACKAGE_REGISTRY_URL.github : PACKAGE_REGISTRY_URL.npm;
+    this.answers.githubNodeAuthTokenName =
+      this.answers.packageRegistry === PACKAGE_REGISTRY.github
+        ? GITHUB_NODE_AUTH_TOKEN_NAME.github
+        : GITHUB_NODE_AUTH_TOKEN_NAME.npm;
 
     if (parentOptions.dryRun) {
       return [];
@@ -188,9 +194,6 @@ const result = {
       {
         type: 'add',
         files: '**',
-        filters: {
-          npmrc: `packageRegistry === '${PACKAGE_REGISTRY.github}'`,
-        },
         templateDir,
       },
       {
@@ -205,6 +208,7 @@ const result = {
           npmrc: '.npmrc',
           'pre-commit': '.husky/pre-commit',
           'eslintrc.js': '.eslintrc.js',
+          'githubWorkflowsTest.yml': '.github/workflows/test.yml',
         },
       },
     ];

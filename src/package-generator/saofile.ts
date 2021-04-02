@@ -2,7 +2,7 @@ import { isArrayFull, isUndefined } from '@nestled/util';
 import { execSync } from 'child_process';
 import { existsSync } from 'fs';
 import { join } from 'path';
-import { CONFIG_FILE_NAME } from '../constants';
+import { CONFIG_FILE_NAME, PACKAGE_REGISTRY, PACKAGE_REGISTRY_URL } from '../constants';
 import { IMrepoConfigFile } from '../interfaces';
 import { createChildProcessPassedOptionsString, getParentProcessPassedOptions } from '../helpers';
 import { loadConfigFile, logger } from '../utils';
@@ -20,7 +20,7 @@ const mergedDefaultOptions = mergeDefaultOptions();
 const hasSubGenerators = isArrayFull(configFile.packageGenerator?.subGenerators);
 
 function mergeDefaultOptions(): IMrepoConfigFile['packageGenerator']['defaultOptions'] & { dependents: string[] } {
-  const configDefaults = configFile.packageGenerator?.defaultOptions || {};
+  const configDefaults: any = configFile.packageGenerator?.defaultOptions || {};
   const { dependencies, dependents } = mergeScopeDepsOptions();
 
   return {
@@ -30,6 +30,10 @@ function mergeDefaultOptions(): IMrepoConfigFile['packageGenerator']['defaultOpt
     authorName: configDefaults.authorName ? configDefaults.authorName : '',
     updateTsconfig: !isUndefined(configDefaults.updateTsconfig) ? !!configDefaults.updateTsconfig : true,
     subGenerators: isArrayFull(configDefaults.subGenerators) ? configDefaults.subGenerators : [],
+    registryUrl:
+      configFile.workspace.registry === PACKAGE_REGISTRY.github
+        ? PACKAGE_REGISTRY_URL.github
+        : PACKAGE_REGISTRY_URL.npm,
     dependencies,
     dependents,
   };
@@ -149,7 +153,8 @@ const result = {
   },
   actions() {
     this.answers.packageName = this.answers.packageName ? this.answers.packageName : parentOptions.packageName;
-    this.answers.packageScope = configFile.workspace.scope;
+    this.answers.scope = configFile.workspace.scope;
+    this.answers.registryUrl = mergedDefaultOptions.registryUrl;
     this.sao.opts.outDir = getInstallPath(this.answers.packageName);
 
     if (parentOptions.useDefaults) {
@@ -177,6 +182,9 @@ const result = {
       },
       {
         type: 'move',
+        patterns: {
+          npmrc: `.npmrc`,
+        },
       },
     ];
   },
@@ -194,10 +202,10 @@ const result = {
       if (this.answers.updateTsconfig) {
         logger.info('cli', `updating tsconfig.json references`);
         execSync(
-          `npx json -I -f ${cwd}/tsconfig.json -e "this.compilerOptions['paths']['@${this.answers.packageScope}/${this.answers.packageName}']=['${this.answers.packageName}/src']"`,
+          `npx json -I -f ${cwd}/tsconfig.json -e "this.compilerOptions['paths']['@${this.answers.scope}/${this.answers.packageName}']=['${this.answers.packageName}/src']"`,
         );
         execSync(
-          `npx json -I -f ${cwd}/tsconfig.json -e "this.compilerOptions['paths']['@${this.answers.packageScope}/${this.answers.packageName}/*']=['${this.answers.packageName}/src/*']"`,
+          `npx json -I -f ${cwd}/tsconfig.json -e "this.compilerOptions['paths']['@${this.answers.scope}/${this.answers.packageName}/*']=['${this.answers.packageName}/src/*']"`,
         );
         execSync(
           `npx json -I -f ${cwd}/tsconfig.json -e "this.references=[...this.references, {'path': '${this.answers.packageName}'}]"`,
