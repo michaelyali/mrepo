@@ -1,7 +1,7 @@
 {
   "name": "monorepo-utils",
   "description": "Monorepo utils",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "private": true,
   "scripts": {
     "build": "npx tsc -b tsconfig.build.json",
@@ -35,7 +35,7 @@
     "commitizen": {
       "path": "node_modules/cz-conventional-changelog"
     },
-    "releaseTag": "latest"
+    "releaseTag": "beta"
   },
   "devDependencies": {
     "@types/jest": "26.0.20",
