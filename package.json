@@ -6,8 +6,6 @@
   "scripts": {
     "build": "npx tsc -b tsconfig.build.json",
     "postbuild": "cpy ./templates/**/* ./lib --parents",
-    "bump": "npx bump package.json package-lock.json lib/package.json --ignore-scripts",
-    "changelog": "conventional-changelog -i CHANGELOG.md -s -r 0",
     "clean": "npx rimraf \"./lib/!(.npmrc|LICENSE|package.json|README.md)**\"",
     "cm": "git-cz",
     "lib:link": "cd ./lib && npm link",
@@ -15,7 +13,7 @@
     "lib:unlink": "cd ./lib && npm unlink",
     "prebuild": "npm run clean",
     "prerelease": "yarn build && yarn test",
-    "release": "yarn bump && yarn changelog",
+    "release": "sh ./scripts/release.sh",
     "postrelease": "sh ./scripts/post-release.sh",
     "test": "npx jest"
   },
@@ -36,7 +34,8 @@
   "config": {
     "commitizen": {
       "path": "node_modules/cz-conventional-changelog"
-    }
+    },
+    "releaseTag": "latest"
   },
   "devDependencies": {
     "@types/jest": "26.0.20",

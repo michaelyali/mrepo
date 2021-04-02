@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-PACKAGE_VERSION=$(cat package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g' | tr -d '[[:space:]]')
+PACKAGE_VERSION=$(cat package.json | npx jase version)
 
 git add .
 git commit -m "chore: release $PACKAGE_VERSION"
