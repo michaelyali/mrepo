@@ -2,10 +2,11 @@ import { isIn } from '@nestled/util';
 import * as color from 'chalk';
 import { execSync } from 'child_process';
 import { CommanderStatic } from 'commander';
+import * as getGitBranch from 'current-git-branch';
 import * as emoji from 'node-emoji';
 import { CONFIG_FILE_NAME } from '../constants';
 import { IMrepoConfigFile } from '../interfaces';
-import { logger } from '../utils';
+import { loadLernaFile, logger } from '../utils';
 
 enum AvailableCommands {
   CLEAN = 'clean',
@@ -13,7 +14,11 @@ enum AvailableCommands {
   TEST = 'test',
   LINK = 'link',
   UNLINK = 'unlink',
+  RELEASE = 'release',
 }
+
+const RELEASE_SEMVER = ['patch', 'minor', 'major', 'prepatch', 'preminor', 'premajor', 'prerelease'];
+const RELEASE_SEMVER_STR = RELEASE_SEMVER.join(', ');
 
 export class ScriptsGeneratorCommand {
   static load(program: CommanderStatic['program'], configFile: IMrepoConfigFile) {
@@ -88,6 +93,22 @@ export class ScriptsGeneratorCommand {
         package: `Package name, if specified. One of: ${packagesNamesStr}`,
       })
       .action((packageName: string) => runUnlink(packageName));
+
+    /**
+     * Release packages
+     */
+    program
+      .command(AvailableCommands.RELEASE)
+      .alias('r')
+      .arguments('<semver> value')
+      .option('--no-git-push', 'Skip git commit and push', false)
+      .option('--no-changelog', 'Skip changelog generation', false)
+      .option('--preid <value>', 'Prerelease identifier', 'alpha')
+      .option('--force-publish', 'Force packages release', false)
+      .description('Release package(s)', {
+        semver: `Package version semver type. One of: ${RELEASE_SEMVER_STR}`,
+      })
+      .action((semver: string, options: any) => runRelease(semver, options));
 
     /**
      * Run `clean` command
@@ -219,6 +240,37 @@ export class ScriptsGeneratorCommand {
     }
 
     /**
+     * Run `release` command
+     * @param semver string
+     */
+    function runRelease(semver: string, options?: any) {
+      logger.info(AvailableCommands.RELEASE, 'Creating new release version(s)', emoji.get(':rocket:'));
+
+      validateReleaseSemver(semver);
+
+      if (options.gitPush) {
+        validateReleaseGitBranch();
+      }
+
+      const preid = semver.startsWith('pre') ? `--preid ${options.preid}` : '';
+      const withChangelog = options.changelog ? '--conventional-commits' : '';
+      const forcePublish = options.forcePublish ? '--force-publish' : '';
+      const lernaVersionCmd = `npx lerna version ${semver} --no-git-tag-version ${withChangelog} ${preid} ${forcePublish} --yes`;
+
+      execSync(lernaVersionCmd, { stdio: 'inherit' });
+
+      const lernaFile = loadLernaFile();
+
+      execSync(`git add . && git commit -m "chore: release v${lernaFile.version}"`);
+
+      logger.info(
+        AvailableCommands.RELEASE,
+        `Creating new release version(s) ${color.green('done')}`,
+        emoji.get(':ok_hand:'),
+      );
+    }
+
+    /**
      * Validate package exists in config
      * @param packageName string
      * @param packagesNames string[]
@@ -228,6 +280,34 @@ export class ScriptsGeneratorCommand {
         const msg = `${emoji.get(':flushed:')} Sorry, package ${color.bold(name)} hasn't been specified in ${color.bold(
           `${CONFIG_FILE_NAME} -> workspace -> packages`,
         )}`;
+        logger.error('oops', msg);
+
+        throw new Error(msg);
+      }
+    }
+
+    /**
+     * Validate release semver
+     * @param semver
+     */
+    function validateReleaseSemver(semver: string) {
+      if (!isIn(semver, RELEASE_SEMVER)) {
+        const msg = `${emoji.get(':flushed:')} Sorry, release version semver type must be one of ${color.bold(
+          RELEASE_SEMVER_STR,
+        )}`;
+        logger.error('oops', msg);
+
+        throw new Error(msg);
+      }
+    }
+
+    function validateReleaseGitBranch() {
+      const branch = getGitBranch({
+        altPath: process.cwd(),
+      });
+
+      if (!branch || !branch.startsWith('release')) {
+        const msg = `${emoji.get(':flushed:')} Sorry, release branch name should start with ${color.bold('release')}`;
         logger.error('oops', msg);
 
         throw new Error(msg);

@@ -9,9 +9,12 @@ import { logger } from '../utils';
 
 export function loadConfigFile(): IMrepoConfigFile {
   const configFilePath = join(process.cwd(), `./${CONFIG_FILE_NAME}`);
-  const configFile = safeRequire(configFilePath);
+  return safeRequire(configFilePath);
+}
 
-  return configFile;
+export function loadLernaFile(): any {
+  const lernaFilePath = join(process.cwd(), `./lerna.json`);
+  return safeRequire(lernaFilePath);
 }
 
 export function validateConfigFile(configFile: IMrepoConfigFile) {

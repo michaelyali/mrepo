@@ -19,7 +19,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/alloyify/monorepo-utils.git"
+    "url": "git+https://github.com/zMotivat0r/mrepo.git"
   },
   "keywords": [],
   "author": {
@@ -28,9 +28,9 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/alloyify/monorepo-utils/issues"
+    "url": "https://github.com/zMotivat0r/mrepo/issues"
   },
-  "homepage": "https://github.com/alloyify/monorepo-utils#readme",
+  "homepage": "https://github.com/zMotivat0r/mrepo#readme",
   "config": {
     "commitizen": {
       "path": "node_modules/cz-conventional-changelog"

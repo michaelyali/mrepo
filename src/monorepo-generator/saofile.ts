@@ -13,16 +13,6 @@ import { getParentProcessPassedOptions } from '../helpers';
 import { logger } from '../utils';
 import { IMonorepoGeneratorAnswers, IParentCommandPassedOptions } from './interfaces';
 
-const LERNA_PACKAGES_VERSIONING_CHOICES = [
-  {
-    name: LERNA_PACKAGES_VERSIONING.common,
-    checked: true,
-  },
-  {
-    name: LERNA_PACKAGES_VERSIONING.independent,
-  },
-];
-
 const PACKAGE_REGISTRY_CHOICES = [
   {
     name: PACKAGE_REGISTRY.github,
@@ -48,8 +38,6 @@ const defaultAnswers: IMonorepoGeneratorAnswers = {
   pgDefaultsLicense: 'MIT',
   pgDefaultsAuthorName: '',
   pgDefaultsAuthorEmail: '',
-  lernaPackageVersioning: LERNA_PACKAGES_VERSIONING.independent,
-  publishPackageCommitMsg: 'chore: publish package',
   currentYear: new Date().getFullYear(),
   packageRegistry: PACKAGE_REGISTRY.github,
   shouldGeneratePackage: false,
@@ -116,20 +104,6 @@ const result = {
     });
 
     prompts.push({
-      name: 'publishPackageCommitMsg',
-      message: 'Commit message when package publishing:',
-      default: defaultAnswers.publishPackageCommitMsg,
-      validate: validateNotEmpty,
-    });
-
-    prompts.push({
-      name: 'lernaPackageVersioning',
-      type: 'list',
-      message: 'Choose lerna packages versioning:',
-      choices: LERNA_PACKAGES_VERSIONING_CHOICES,
-    });
-
-    prompts.push({
       name: 'packageRegistry',
       type: 'list',
       message: 'Choose packages registry:',
@@ -165,18 +139,12 @@ const result = {
       this.answers.pgDefaultsLicense = defaultAnswers.pgDefaultsLicense;
       this.answers.pgDefaultsAuthorName = defaultAnswers.pgDefaultsAuthorName;
       this.answers.pgDefaultsAuthorEmail = defaultAnswers.pgDefaultsAuthorEmail;
-      this.answers.publishPackageCommitMsg = defaultAnswers.publishPackageCommitMsg;
-      this.answers.lernaPackageVersioning = defaultAnswers.lernaPackageVersioning;
       this.answers.packageRegistry = defaultAnswers.packageRegistry;
       this.answers.shouldGeneratePackage = defaultAnswers.shouldGeneratePackage;
       this.answers.registryUrl = defaultAnswers.registryUrl;
       this.answers.githubNodeAuthTokenName = defaultAnswers.githubNodeAuthTokenName;
     }
 
-    this.answers.lernaPackageVersioning =
-      this.answers.lernaPackageVersioning === LERNA_PACKAGES_VERSIONING.independent
-        ? LERNA_PACKAGES_VERSIONING.independent
-        : '0.0.0';
     this.answers.registryUrl =
       this.answers.packageRegistry === PACKAGE_REGISTRY.github ? PACKAGE_REGISTRY_URL.github : PACKAGE_REGISTRY_URL.npm;
     this.answers.githubNodeAuthTokenName =

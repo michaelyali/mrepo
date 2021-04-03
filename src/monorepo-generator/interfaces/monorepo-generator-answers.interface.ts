@@ -6,8 +6,6 @@ export interface IMonorepoGeneratorAnswers {
   pgDefaultsLicense: string;
   pgDefaultsAuthorName: string;
   pgDefaultsAuthorEmail: string;
-  lernaPackageVersioning: string;
-  publishPackageCommitMsg: string;
   currentYear: number;
   packageRegistry: string;
   shouldGeneratePackage: boolean;

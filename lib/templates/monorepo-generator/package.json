@@ -23,6 +23,7 @@
     "list_": "npx lerna list -l",
     "prepare": "npx husky install",
     "reboot": "yarn clean && npx rimraf ./node_modules && yarn boot",
+    "release": "mrepo release",
     "test": "mrepo test",
     "test:coverage": "mrepo test --coverage",
     "test:e2e": "mrepo test -f e2e",
