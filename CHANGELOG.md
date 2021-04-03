@@ -1,5 +1,13 @@
+## <small>0.1.7-beta.1 (2021-04-03)</small>
+
+* ci(github): updated tests action ([358d238](https://github.com/alloyify/monorepo-utils/commit/358d238))
+* feat(generators): added github test action ([9fc3d82](https://github.com/alloyify/monorepo-utils/commit/9fc3d82))
+
+
+
 ## <small>0.1.6 (2021-04-02)</small>
 
+* chore: release 0.1.6 ([dc32c82](https://github.com/alloyify/monorepo-utils/commit/dc32c82))
 * ci(github): updated tests and release actions ([6bb3ad6](https://github.com/alloyify/monorepo-utils/commit/6bb3ad6))
 
 
