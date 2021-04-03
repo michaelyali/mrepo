@@ -12,4 +12,6 @@ export interface IMonorepoGeneratorAnswers {
     packageRegistry: string;
     shouldGeneratePackage: boolean;
     firstPackageName: string;
+    registryUrl: string;
+    githubNodeAuthTokenName: string;
 }

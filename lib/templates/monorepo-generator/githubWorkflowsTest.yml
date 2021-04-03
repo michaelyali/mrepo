@@ -5,22 +5,19 @@ on: pull_request
 jobs:
   test:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v2
 
       - name: Set npm token
         uses: actions/setup-node@v2
         with:
-          node-version: '12.x'
-          registry-url: https://registry.npmjs.org
+          registry-url: https://<%= registryUrl %>
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.<%= githubNodeAuthTokenName %> }}
 
       - name: Install
-        run: npm install
+        run: yarn boot
 
       - name: Build
-        run: npm run build
-
-      - name: Run tests
-        run: npm test
+        run: yarn build

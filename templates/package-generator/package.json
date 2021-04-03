@@ -1,5 +1,5 @@
 {
-  "name": "@<%= packageScope %>/<%= packageName %>",
+  "name": "@<%= scope %>/<%= packageName %>",
   "description": "<%= packageName %> package",
   "version": "0.0.0",
   "license": "<%= license %>",

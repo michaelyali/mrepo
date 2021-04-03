@@ -31,6 +31,7 @@ export function validateConfigFile(configFile: IMrepoConfigFile) {
         properties: {
           name: { type: 'string' },
           scope: { type: 'string' },
+          registry: { type: 'string' },
           packages: {
             type: 'array',
             minItems: 0,
