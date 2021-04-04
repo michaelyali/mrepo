@@ -18,7 +18,7 @@
 </div>
 
 <div align="center">
-  <sub>Built with :purple_heart: by 
+  <sub>Built by 
   <a href="https://twitter.com/MichaelYali">@MichaelYali</a>
 </div>
 

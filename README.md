@@ -43,6 +43,42 @@ Mrepo makes it easy to create new TypeScript packages monorepository, generate n
 - :pineapple: GitHub actions included (tests & release)
 - :coffee: Issues and Pull Request templates
 
+## Install
+
+```shell
+$ npm i @zmotivat0r/mrepo -g
+```
+
+## Commands
+
+- [mrepo new](#mrepo-new)
+
+### `mrepo new`
+
+Generates new TypeScript monorepository.
+
+```shell
+mrepo new|n [options] <name>
+
+Arguments:
+  name               Monorepo name
+
+Options:
+  -y, --yes          Use default options (default: false)
+  --dry-run          Dry run (default: false)
+  --skip-scripts     Skip post-generator scripts (default: false)
+  --skip-git         Skip git init (default: false)
+  --skip-git-commit  Skip git initial commit (default: false)
+  --skip-install     Skip dependencies installation (default: false)
+  -h, --help         display help for command
+```
+
+Usage:
+
+```shell
+$ mrepo new awesome-monorepo --yes --skip-git
+```
+
 ## Support
 
 Any support is welcome. At least you can give it a star :star:
