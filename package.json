@@ -1,7 +1,7 @@
 {
   "name": "monorepo-utils",
   "description": "Monorepo utils",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "private": true,
   "scripts": {
     "build": "npx tsc -b tsconfig.build.json",

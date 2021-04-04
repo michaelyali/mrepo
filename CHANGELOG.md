@@ -1,5 +1,12 @@
+## <small>0.1.8 (2021-04-04)</small>
+
+* ci: updated release action ([618119f](https://github.com/zMotivat0r/mrepo/commit/618119f))
+
+
+
 ## <small>0.1.7 (2021-04-04)</small>
 
+* chore: release 0.1.7 ([ac4b6ba](https://github.com/zMotivat0r/mrepo/commit/ac4b6ba))
 * feat: added github templates ([d908cf0](https://github.com/zMotivat0r/mrepo/commit/d908cf0))
 
 
