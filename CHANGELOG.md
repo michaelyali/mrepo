@@ -1,5 +1,12 @@
+## <small>0.1.7 (2021-04-04)</small>
+
+* feat: added github templates ([d908cf0](https://github.com/zMotivat0r/mrepo/commit/d908cf0))
+
+
+
 ## <small>0.1.7-beta.4 (2021-04-04)</small>
 
+* chore: release 0.1.7-beta.4 ([8ddc436](https://github.com/zMotivat0r/mrepo/commit/8ddc436))
 * feat: added repository to the generated package.json ([c91284a](https://github.com/zMotivat0r/mrepo/commit/c91284a))
 
 
