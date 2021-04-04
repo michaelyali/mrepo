@@ -1,9 +1,10 @@
-## <small>0.2.1 (2021-04-04)</small>
+## <small>0.2.2 (2021-04-04)</small>
 
 * chore: release 0.1.8 ([141b85c](https://github.com/zMotivat0r/mrepo/commit/141b85c))
 * chore: release 0.1.9 ([432c10b](https://github.com/zMotivat0r/mrepo/commit/432c10b))
 * chore: release 0.2.0 ([7b8ba31](https://github.com/zMotivat0r/mrepo/commit/7b8ba31))
 * chore: release 0.2.0 ([2a55f73](https://github.com/zMotivat0r/mrepo/commit/2a55f73))
+* chore: release 0.2.1 ([e1f2661](https://github.com/zMotivat0r/mrepo/commit/e1f2661))
 * chore(github): added PR and issues templates ([ef40386](https://github.com/zMotivat0r/mrepo/commit/ef40386))
 * fix(monorepo-generator): updated package.json template ([c53c31a](https://github.com/zMotivat0r/mrepo/commit/c53c31a))
 * docs: added build clean generate commands docs ([38c135e](https://github.com/zMotivat0r/mrepo/commit/38c135e))
