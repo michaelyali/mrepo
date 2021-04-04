@@ -255,7 +255,7 @@ export class ScriptsGeneratorCommand {
       const preid = semver.startsWith('pre') ? `--preid ${options.preid}` : '';
       const withChangelog = options.changelog ? '--conventional-commits' : '';
       const forcePublish = options.forcePublish ? '--force-publish' : '';
-      const lernaVersionCmd = `npx lerna version ${semver} --no-git-tag-version ${withChangelog} ${preid} ${forcePublish} --yes`;
+      const lernaVersionCmd = `npx lerna version ${semver} --no-git-tag-version ${withChangelog} ${preid} ${forcePublish}`;
 
       execSync(lernaVersionCmd, { stdio: 'inherit' });
 

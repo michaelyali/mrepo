@@ -3,12 +3,7 @@ import { existsSync, mkdirSync } from 'fs';
 import { join } from 'path';
 import * as color from 'chalk';
 import * as emoji from 'node-emoji';
-import {
-  GITHUB_NODE_AUTH_TOKEN_NAME,
-  LERNA_PACKAGES_VERSIONING,
-  PACKAGE_REGISTRY,
-  PACKAGE_REGISTRY_URL,
-} from '../constants';
+import { GITHUB_NODE_AUTH_TOKEN_NAME, PACKAGE_REGISTRY, PACKAGE_REGISTRY_URL } from '../constants';
 import { getParentProcessPassedOptions } from '../helpers';
 import { logger } from '../utils';
 import { IMonorepoGeneratorAnswers, IParentCommandPassedOptions } from './interfaces';
