@@ -7,7 +7,7 @@
     "build": "npx tsc -b tsconfig.build.json",
     "postbuild": "cpy ./templates/**/* ./lib --parents",
     "clean": "npx rimraf \"./lib/!(.npmrc|LICENSE|package.json|README.md)**\"",
-    "cm": "git-cz",
+    "commit_": "git-cz",
     "lib:link": "cd ./lib && npm link",
     "lib:try": "yarn build && yarn lib:unlink && yarn lib:link",
     "lib:unlink": "cd ./lib && npm unlink",
