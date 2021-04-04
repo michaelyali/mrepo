@@ -1,0 +1,86 @@
+name: Release
+
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  release:
+    if: github.event.pull_request.merged && startsWith(github.head_ref, 'release')
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set NPM Token
+        uses: actions/setup-node@v2
+        with:
+          registry-url: https://<%= registryUrl %>
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.<%= githubNodeAuthTokenName %> }}
+
+      - name: Install
+        run: yarn boot
+
+      - name: Build
+        run: yarn build
+
+      - name: Run Tests
+        run: yarn test
+
+      - name: Set Current Version
+        shell: bash -ex {0}
+        run: |
+          CURRENT_VERSION=$(cat lerna.json | npx jase version)
+          [[ $CURRENT_VERSION =~ "-" ]] && DIST_TAG=$(echo $CURRENT_VERSION | cut -d '-' -f 2 | cut -d '.' -f 1) || DIST_TAG="latest"
+          echo "CURRENT_VERSION=${CURRENT_VERSION}" >> $GITHUB_ENV
+          echo "DIST_TAG=${DIST_TAG}" >> $GITHUB_ENV
+
+      - name: Get Latest Git Tag
+        uses: mukunku/tag-exists-action@v1.0.0
+        id: checkTag
+        with:
+          tag: v${{ env.CURRENT_VERSION }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create Git Tag
+        if: steps.checkTag.outputs.exists == 'false'
+        uses: negz/create-tag@v1
+        with:
+          version: v${{ env.CURRENT_VERSION }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create Release
+        if: steps.checkTag.outputs.exists == 'false'
+        uses: actions/create-release@v1
+        with:
+          tag_name: v${{ env.CURRENT_VERSION }}
+          release_name: v${{ env.CURRENT_VERSION }}
+          body: |
+            ${{ github.event.pull_request.body }}
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish Packages
+        if: steps.checkTag.outputs.exists == 'false'
+        run: |
+          lerna publish from-package --no-git-reset --yes --registry https://<%= registryUrl %> --dist-tag ${{ env.DIST_TAG }}
+        env:
+          GH_TOKEN: ${{ secrets.<%= githubNodeAuthTokenName %> }}
+          NODE_AUTH_TOKEN: ${{ secrets.<%= githubNodeAuthTokenName %> }}
+
+      - name: Create a Comment
+        uses: actions/github-script@0.8.0
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            github.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: 'Packages with version [v${{ env.CURRENT_VERSION }}](https://github.com/${{ github.repository }}/releases/tag/v${{ env.CURRENT_VERSION }}) have been released 🎉'
+            })
