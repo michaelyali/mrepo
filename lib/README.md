@@ -33,7 +33,7 @@ Mrepo makes it easy to create new TypeScript packages monorepository, generate n
 
 ![](img/mrepo.gif)
 
-<img align="right" src="img/mrepo.gif" alt="Mrepo demo" />
+<img align="right" src="../img/mrepo.gif" alt="Mrepo demo" />
 
 - Generate TypeScript monorepository
 
