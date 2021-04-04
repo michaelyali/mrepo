@@ -1,5 +1,12 @@
+## <small>0.1.7-beta.3 (2021-04-04)</small>
+
+* fix: added current-git-branch package ([34c486c](https://github.com/zMotivat0r/mrepo/commit/34c486c))
+
+
+
 ## <small>0.1.7-beta.2 (2021-04-04)</small>
 
+* chore: release 0.1.7-beta.2 ([0c88a31](https://github.com/zMotivat0r/mrepo/commit/0c88a31))
 * feat: added create packages npmrc util ([344ce46](https://github.com/zMotivat0r/mrepo/commit/344ce46))
 * fix: update release command ([7b7f46e](https://github.com/zMotivat0r/mrepo/commit/7b7f46e))
 
