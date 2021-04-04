@@ -31,7 +31,7 @@ Mrepo makes it easy to create new TypeScript packages monorepository, generate n
 
 ## Features
 
-<img align="right" src="lib/img/mrepo-demo.gif" alt="Mrepo demo" width="420" />
+<img align="right" src="lib/img/demo.gif" alt="Mrepo demo" width="420" />
 
 - :rocket: Generate TypeScript monorepository
 - :airplane: Package generator with references between other packages included, and sub-generators support

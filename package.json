@@ -1,12 +1,12 @@
 {
   "name": "mrepo",
   "description": "Awesome Typescript Monorepo Generator",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "private": true,
   "scripts": {
     "build": "npx tsc -b tsconfig.build.json",
     "postbuild": "cpy ./templates/**/* ./lib --parents",
-    "clean": "npx rimraf \"./lib/!(.npmrc|LICENSE|package.json|README.md)**\"",
+    "clean": "npx rimraf \"./lib/!(img|.npmrc|LICENSE|package.json|README.md)**\"",
     "commit_": "git-cz",
     "lib:link": "cd ./lib && npm link",
     "lib:try": "yarn build && yarn lib:unlink && yarn lib:link",
