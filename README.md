@@ -31,9 +31,7 @@ Mrepo makes it easy to create new TypeScript packages monorepository, generate n
 
 ## Features
 
-![](img/mrepo.gif)
-
-<img align="right" src="img/mrepo.gif" alt="Mrepo demo" />
+<img align="right" src="img/mrepo.gif" alt="Mrepo demo" width="420" />
 
 - Generate TypeScript monorepository
 
