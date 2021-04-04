@@ -1,5 +1,6 @@
 {
   "name": "@zmotivat0r/mrepo",
+  "description": "Awesome Typescript Monorepo Generator",
   "version": "0.1.8",
   "main": "index.js",
   "types": "index.d.ts",
