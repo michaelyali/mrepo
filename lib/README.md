@@ -20,9 +20,6 @@
 <div align="center">
   <sub>Built with :purple_heart: by 
   <a href="https://twitter.com/MichaelYali">@MichaelYali</a>
-  <div align="center">
-    :star2: :eyes: :zap: :boom:
-  </div>
 </div>
 
 <br />
@@ -34,10 +31,19 @@ Mrepo makes it easy to create new TypeScript packages monorepository, generate n
 <img align="right" src="../img/mrepo-demo.gif" alt="Mrepo demo" width="420" />
 
 - Generate TypeScript monorepository
+- Package generator with references between other packages included, and sub-generators support
+- Build, clean, link/unlink, release packages commnads
+- Jest testing ready (unit, e2e, coverage commands included)
+- Lint and format (eslint & prettier)
+- Husky hooks ready (pre-commit hook included)
+- Conventional commits and changelogs
+- GitHub actions included (tests & release)
+- Issues and Pull Request templates
+- Generate TypeScript monorepository
 
 ## Support
 
-Any support is welcome. At least you can give it a star :star:
+Any support is welcome. At least you can give it a star
 
 ## License
 

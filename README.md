@@ -33,7 +33,15 @@ Mrepo makes it easy to create new TypeScript packages monorepository, generate n
 
 <img align="right" src="img/mrepo-demo.gif" alt="Mrepo demo" width="420" />
 
-- Generate TypeScript monorepository
+- :rocket: Generate TypeScript monorepository
+- :airplane: Package generator with references between other packages included, and sub-generators support
+- :vertical_traffic_light: Build, clean, link/unlink, release packages commnads
+- :icecream: Jest testing ready (unit, e2e, coverage commands included)
+- :lollipop: Lint and format (eslint & prettier)
+- :candy: Husky hooks ready (pre-commit hook included)
+- :watermelon: Conventional commits and changelogs
+- :pineapple: GitHub actions included (tests & release)
+- :coffee: Issues and Pull Request templates
 
 ## Support
 
