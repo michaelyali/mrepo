@@ -1,5 +1,12 @@
+## <small>0.1.7-beta.4 (2021-04-04)</small>
+
+* feat: added repository to the generated package.json ([c91284a](https://github.com/zMotivat0r/mrepo/commit/c91284a))
+
+
+
 ## <small>0.1.7-beta.3 (2021-04-04)</small>
 
+* chore: release 0.1.7-beta.3 ([aa928a1](https://github.com/zMotivat0r/mrepo/commit/aa928a1))
 * fix: added current-git-branch package ([34c486c](https://github.com/zMotivat0r/mrepo/commit/34c486c))
 
 
