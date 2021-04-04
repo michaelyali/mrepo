@@ -1,5 +1,8 @@
-## <small>0.1.8 (2021-04-04)</small>
+## <small>0.1.9 (2021-04-04)</small>
 
+* docs: updated package.json and readmes ([d6dab86](https://github.com/zMotivat0r/mrepo/commit/d6dab86))
+* chore: release 0.1.8 ([141b85c](https://github.com/zMotivat0r/mrepo/commit/141b85c))
+* chore(github): added PR and issues templates ([ef40386](https://github.com/zMotivat0r/mrepo/commit/ef40386))
 * ci: updated release action ([618119f](https://github.com/zMotivat0r/mrepo/commit/618119f))
 
 
