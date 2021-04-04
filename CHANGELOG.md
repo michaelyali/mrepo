@@ -1,7 +1,17 @@
-## <small>0.1.9 (2021-04-04)</small>
+## 0.2.0 (2021-04-04)
 
+* docs: added build clean generate commands docs ([38c135e](https://github.com/zMotivat0r/mrepo/commit/38c135e))
+* docs: added demo gif ([4d05582](https://github.com/zMotivat0r/mrepo/commit/4d05582))
+* docs: added features section ([45bdeff](https://github.com/zMotivat0r/mrepo/commit/45bdeff))
+* docs: added img to the lib folder ([cc184fc](https://github.com/zMotivat0r/mrepo/commit/cc184fc))
+* docs: added mrepo new command docs ([ca800de](https://github.com/zMotivat0r/mrepo/commit/ca800de))
+* docs: finished with readme ([7e9797e](https://github.com/zMotivat0r/mrepo/commit/7e9797e))
+* docs: reuploaded demo gif ([be3f605](https://github.com/zMotivat0r/mrepo/commit/be3f605))
+* docs: started added readme ([ca99cfe](https://github.com/zMotivat0r/mrepo/commit/ca99cfe))
 * docs: updated package.json and readmes ([d6dab86](https://github.com/zMotivat0r/mrepo/commit/d6dab86))
+* docs: updated readme gifs ([56e90fd](https://github.com/zMotivat0r/mrepo/commit/56e90fd))
 * chore: release 0.1.8 ([141b85c](https://github.com/zMotivat0r/mrepo/commit/141b85c))
+* chore: release 0.1.9 ([432c10b](https://github.com/zMotivat0r/mrepo/commit/432c10b))
 * chore(github): added PR and issues templates ([ef40386](https://github.com/zMotivat0r/mrepo/commit/ef40386))
 * ci: updated release action ([618119f](https://github.com/zMotivat0r/mrepo/commit/618119f))
 
