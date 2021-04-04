@@ -1,1 +1,1 @@
-# Awesome Monorepo Generator and more
+# Awesome Typescript Monorepo Generator
