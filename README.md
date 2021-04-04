@@ -55,10 +55,17 @@ $ npm i @zmotivat0r/mrepo -g
 - [mrepo generate](#mrepo-generate)
 - [mrepo build](#mrepo-build)
 - [mrepo clean](#mrepo-clean)
+- [mrepo test](#mrepo-test)
+- [mrepo link](#mrepo-link)
+- [mrepo unlink](#mrepo-unlink)
+- [mrepo release](#mrepo-release)
+  - [release flow](#release-flow)
 
 ### mrepo new
 
-Generate new TypeScript monorepository.
+_Generate new TypeScript monorepository._
+
+_Info:_
 
 ```shell
 mrepo new|n [options] <name>
@@ -76,15 +83,18 @@ Options:
   -h, --help         display info
 ```
 
-Usage:
+_Usage:_
 
 ```shell
+$ mrepo new awesome-monorepo
 $ mrepo new awesome-monorepo --yes --skip-git
 ```
 
 ### mrepo generate
 
-Generate new package, update root `tsconfig.json`, add references to other packages, if needed.
+_Generate new package, update root `tsconfig.json`, add references to other packages, if needed._
+
+_Info:_
 
 ```shell
 mrepo generate|g [options] [package]
@@ -100,15 +110,18 @@ Options:
   -h, --help                 display info
 ```
 
-Usage:
+_Usage:_
 
 ```shell
+$ mrepo generate
 $ mrepo generate cool-new-package --yes
 ```
 
 ### mrepo build
 
-Build all packages or a specified one.
+_Build all packages or a specified one._
+
+_Info:_
 
 ```shell
 mrepo build|b [options] [package]
@@ -120,7 +133,7 @@ Options:
   -h, --help  display info
 ```
 
-Usage:
+_Usage:_
 
 ```shell
 $ mrepo build
@@ -129,7 +142,9 @@ $ mrepo build packageName
 
 ### mrepo clean
 
-Removes `lib` folder in all packages ot in a specified one.
+_Remove `lib` folder in all packages ot a specified one._
+
+_Info:_
 
 ```shell
 mrepo clean|c [options] [package]
@@ -141,12 +156,131 @@ Options:
   -h, --help  display info
 ```
 
-Usage:
+_Usage:_
 
 ```shell
 $ mrepo clean
 $ mrepo clean packageName
 ```
+
+### mrepo test
+
+_Run tests using Jest for all packages or a specified one._
+
+_Info:_
+
+```shell
+mrepo test|t [options] [package]
+
+Arguments:
+  package               Package name, optional
+
+Options:
+  -f, --folder <value>  Tests folder (default: "packages")
+  -c, --config <value>  Jest config file (default: "jest.config.js")
+  --coverage            Run with coverage (default: false)
+  --verbose             Run verbose (default: false)
+  -h, --help            display info
+```
+
+_Usage:_
+
+```shell
+$ mrepo test
+$ mrepo test packageName --verbose
+```
+
+### mrepo link
+
+_Exec `npm link` for all packages or a specified one._
+
+_Info:_
+
+```shell
+mrepo link|l [options] [package]
+
+Arguments:
+  package     Package name, optional
+
+Options:
+  --build     Build before linking (default: false)
+  -h, --help  display info
+```
+
+_Usage:_
+
+```shell
+$ mrepo link
+$ mrepo link packageName --build
+```
+
+### mrepo unlink
+
+_Exec `npm unlink` for all packages or a specified one._
+
+_Info:_
+
+```shell
+mrepo unlink|u [options] [package]
+
+Arguments:
+  package     Package name, optional
+
+Options:
+  -h, --help  display info
+```
+
+_Usage:_
+
+```shell
+$ mrepo unlink
+$ mrepo unlink packageName
+```
+
+### mrepo release
+
+_Start release new version: bump package(s) version, generate changelog, git commit and push._
+
+_Info:_
+
+```shell
+mrepo release|r [options] <semver>
+
+
+Arguments:
+  semver           Package version semver type. One of: patch, minor, major,
+                                  prepatch, preminor, premajor, prerelease
+
+Options:
+  --no-git-push    Skip git commit and push
+  --no-changelog   Skip changelog generation
+  --preid <value>  Prerelease identifier (default: "alpha")
+  --force-publish  Force packages release (default: false)
+  -h, --help       display info
+```
+
+_Usage:_
+
+```shell
+$ mrepo release minor
+$ mrepo release premajor --preid beta
+```
+
+### release flow
+
+Mrepo comes with the `release` GitHub action, so here is the default release flow:
+
+1. A developer creates a branch with the name that starts with `release` (e.g. `release/my-new-package`).
+2. Runs `mrepo release <semver>`
+3. Creates a Pull Request.
+4. When merged, the `release` GitHub action executes the following:  
+   4.1. Install, build, test  
+   4.2. Checks latest git tag, then creates a new tag  
+   4.3. Creates GitHub release with newly created tag  
+   4.4. Publishes packages to the registry  
+   4.5. Notifies in the comment of a Pull Request when packages are being published
+
+It's worth mentioning that all of the default commands, along with some others are already added to the `package.json` scripts section.
 
 ## Support
 
