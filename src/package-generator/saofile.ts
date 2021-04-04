@@ -5,7 +5,7 @@ import { join } from 'path';
 import { CONFIG_FILE_NAME, PACKAGE_REGISTRY, PACKAGE_REGISTRY_URL } from '../constants';
 import { IMrepoConfigFile } from '../interfaces';
 import { createChildProcessPassedOptionsString, getParentProcessPassedOptions } from '../helpers';
-import { loadConfigFile, logger } from '../utils';
+import { loadConfigFile, loadRootPackageJson, logger } from '../utils';
 import { IParentCommandPassedOptions } from './interfaces/parent-command-passed-options.interface';
 
 // options
@@ -14,6 +14,7 @@ const templateDir = join(__dirname, '../templates/package-generator');
 const getInstallPath = (path) => join(cwd, `./${configFile.workspace.name}/${path}`);
 const validatePackageName = (v: string) => !!v && !existsSync(getInstallPath(v));
 const configFile = loadConfigFile();
+const rootPackageJson = loadRootPackageJson();
 const scopePackages = getScopePackages();
 const parentOptions = getParentProcessPassedOptions<IParentCommandPassedOptions>(process);
 const mergedDefaultOptions = mergeDefaultOptions();
@@ -155,6 +156,7 @@ const result = {
     this.answers.packageName = this.answers.packageName ? this.answers.packageName : parentOptions.packageName;
     this.answers.scope = configFile.workspace.scope;
     this.answers.registryUrl = mergedDefaultOptions.registryUrl;
+    this.answers.repository = rootPackageJson.repository;
     this.sao.opts.outDir = getInstallPath(this.answers.packageName);
 
     if (parentOptions.useDefaults) {

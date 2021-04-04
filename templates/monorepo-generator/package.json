@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "description": "Monorepo for <%= monorepoName %>",
   "license": "<%= pgDefaultsLicense %>",
+  "repository": "https://github.com/<%= scope %>/<%= monorepoName %>",
   "workspaces": [
     "<%= workspaceName %>/*"
   ],
@@ -15,7 +16,7 @@
     "boot": "npx lerna bootstrap",
     "build": "mrepo build",
     "clean": "mrepo clean",
-    "comsg": "npx git-cz",
+    "commit_": "npx git-cz",
     "format": "npx pretty-quick --pattern \"<%= workspaceName %>/**/*.*(js|ts)\"",
     "generate": "mrepo generate",
     "link_": "mrepo link",

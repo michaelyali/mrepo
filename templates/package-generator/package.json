@@ -5,6 +5,7 @@
   "license": "<%= license %>",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
+  "repository": "<%= repository %>",
   "publishConfig": {
     "access": "<%= access %>"
   },

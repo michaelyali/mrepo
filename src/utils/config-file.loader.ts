@@ -17,6 +17,11 @@ export function loadLernaFile(): any {
   return safeRequire(lernaFilePath);
 }
 
+export function loadRootPackageJson(): any {
+  const packageJsonPath = join(process.cwd(), `./package.json`);
+  return safeRequire(packageJsonPath);
+}
+
 export function validateConfigFile(configFile: IMrepoConfigFile) {
   if (!configFile) {
     const msg = `${emoji.get(':flushed:')} ${CONFIG_FILE_NAME} hasn't been found in project root`;

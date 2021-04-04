@@ -8,4 +8,5 @@ export interface IPackageGeneratorAnswers {
   dependencies?: string[];
   dependents?: string[];
   registryUrl: string;
+  repository?: string;
 }
