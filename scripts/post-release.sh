@@ -4,6 +4,4 @@ PACKAGE_VERSION=$(cat package.json | npx jase version)
 
 git add .
 git commit -m "chore: release $PACKAGE_VERSION"
-git tag v$PACKAGE_VERSION
-git push --tags
 git push
