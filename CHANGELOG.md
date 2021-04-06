@@ -1,13 +1,16 @@
-## <small>0.2.3 (2021-04-06)</small>
+## <small>0.2.4 (2021-04-06)</small>
 
 * fix: updated mrepo version ([b350143](https://github.com/zMotivat0r/mrepo/commit/b350143))
+* fix(monorepo-generator): updated mrepo version ([89cb302](https://github.com/zMotivat0r/mrepo/commit/89cb302))
 * fix(monorepo-generator): updated package.json template ([c53c31a](https://github.com/zMotivat0r/mrepo/commit/c53c31a))
+* fix(pacakge-generator): updated template files ([a384955](https://github.com/zMotivat0r/mrepo/commit/a384955))
 * chore: release 0.1.8 ([141b85c](https://github.com/zMotivat0r/mrepo/commit/141b85c))
 * chore: release 0.1.9 ([432c10b](https://github.com/zMotivat0r/mrepo/commit/432c10b))
 * chore: release 0.2.0 ([7b8ba31](https://github.com/zMotivat0r/mrepo/commit/7b8ba31))
 * chore: release 0.2.0 ([2a55f73](https://github.com/zMotivat0r/mrepo/commit/2a55f73))
 * chore: release 0.2.1 ([e1f2661](https://github.com/zMotivat0r/mrepo/commit/e1f2661))
 * chore: release 0.2.2 ([9e086e5](https://github.com/zMotivat0r/mrepo/commit/9e086e5))
+* chore: release 0.2.3 ([a44be14](https://github.com/zMotivat0r/mrepo/commit/a44be14))
 * chore(github): added PR and issues templates ([ef40386](https://github.com/zMotivat0r/mrepo/commit/ef40386))
 * docs: added build clean generate commands docs ([38c135e](https://github.com/zMotivat0r/mrepo/commit/38c135e))
 * docs: added demo gif ([4d05582](https://github.com/zMotivat0r/mrepo/commit/4d05582))
