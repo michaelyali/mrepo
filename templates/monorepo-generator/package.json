@@ -41,7 +41,7 @@
     "@types/node": "14.14.35",
     "@typescript-eslint/eslint-plugin": "4.19.0",
     "@typescript-eslint/parser": "4.19.0",
-    "@zmotivat0r/mrepo": "0.2.3",
+    "@zmotivat0r/mrepo": "0.2.4",
     "commitizen": "4.2.3",
     "conventional-changelog-cli": "2.1.1",
     "cz-conventional-changelog": "3.3.0",
