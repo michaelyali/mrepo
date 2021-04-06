@@ -1,7 +1,7 @@
 {
   "name": "mrepo",
   "description": "Awesome Typescript Monorepo Generator",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "private": true,
   "scripts": {
     "build": "npx tsc -b tsconfig.build.json",
