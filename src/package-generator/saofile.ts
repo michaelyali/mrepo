@@ -185,7 +185,9 @@ const result = {
       {
         type: 'move',
         patterns: {
-          npmrc: `.npmrc`,
+          'noop.spec.ts': 'test/noop.spec.ts',
+          'srcIndex.ts': 'src/index.ts',
+          packageLICENSE: 'LICENSE',
         },
       },
     ];
