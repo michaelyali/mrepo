@@ -188,6 +188,7 @@ const result = {
           'noop.spec.ts': 'test/noop.spec.ts',
           'srcIndex.ts': 'src/index.ts',
           packageLICENSE: 'LICENSE',
+          packageJson: 'package.json',
         },
       },
     ];
