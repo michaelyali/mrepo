@@ -1,5 +1,6 @@
-## <small>0.2.7 (2021-04-06)</small>
+## 0.3.0 (2021-04-09)
 
+* feat(lerna): added independent packages versioning support ([56dec71](https://github.com/zMotivat0r/mrepo/commit/56dec71))
 * chore: release 0.1.8 ([141b85c](https://github.com/zMotivat0r/mrepo/commit/141b85c))
 * chore: release 0.1.9 ([432c10b](https://github.com/zMotivat0r/mrepo/commit/432c10b))
 * chore: release 0.2.0 ([7b8ba31](https://github.com/zMotivat0r/mrepo/commit/7b8ba31))
@@ -10,6 +11,7 @@
 * chore: release 0.2.4 ([fdbaa20](https://github.com/zMotivat0r/mrepo/commit/fdbaa20))
 * chore: release 0.2.5 ([ae53d03](https://github.com/zMotivat0r/mrepo/commit/ae53d03))
 * chore: release 0.2.6 ([814e84c](https://github.com/zMotivat0r/mrepo/commit/814e84c))
+* chore: release 0.2.7 ([7307a4d](https://github.com/zMotivat0r/mrepo/commit/7307a4d))
 * chore(github): added PR and issues templates ([ef40386](https://github.com/zMotivat0r/mrepo/commit/ef40386))
 * ci: updated release action ([e9e59fc](https://github.com/zMotivat0r/mrepo/commit/e9e59fc))
 * ci: updated release action ([618119f](https://github.com/zMotivat0r/mrepo/commit/618119f))
