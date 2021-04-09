@@ -245,15 +245,16 @@ mrepo release|r [options] <semver>
 
 
 Arguments:
-  semver           Package version semver type. One of: patch, minor, major,
-                                  prepatch, preminor, premajor, prerelease
+  semver              Package version semver type. One of: patch, minor, major,
+                        prepatch, preminor, premajor, prerelease, select
 
 Options:
-  --no-git-push    Skip git commit and push
-  --no-changelog   Skip changelog generation
-  --preid <value>  Prerelease identifier (default: "alpha")
-  --force-publish  Force packages release (default: false)
-  -h, --help       display info
+  --no-git-push       Skip git commit and push
+  --no-changelog      Skip changelog generation
+  --preid <value>     Prerelease identifier (default: "alpha")
+  --dist-tag <value>  Dist tag when Lerna version is "independent" (default: "latest")
+  --force-publish     Force packages release (default: false)
+  -h, --help          display info
 ```
 
 _Usage:_
@@ -265,17 +266,19 @@ $ mrepo release premajor --preid beta
 
 ### release flow
 
-Mrepo comes with the `release` GitHub action, so here is the default release flow:
+Mrepo comes with the `release` GitHub action wich supports `independent` and `common` packages versioning. Here is the default release flow:
 
 1. A developer creates a branch with the name that starts with `release` (e.g. `release/my-new-package`).
-2. Runs `mrepo release <semver>`
+2. Runs `mrepo release <semver> [options]`.
 3. Creates a Pull Request.
-4. When merged, the `release` GitHub action executes the following:  
-   4.1. Install, build, test  
-   4.2. Checks latest git tag, then creates a new tag  
-   4.3. Creates GitHub release with newly created tag  
-   4.4. Publishes packages to the registry  
-   4.5. Notifies in the comment of a Pull Request when packages are being published
+4. When merged, the `release` GitHub action executes the following:
+   - Install, build, test
+   - Checks latest git tag, then creates a new tag
+     - if versioning is `independent` then a tag will be incremented from the previous one (semver `minor` part)
+     - if versioning is `common` then a tag will be created from common version
+   - Creates GitHub release with newly created tag
+   - Publishes packages to the registry
+   - Notifies in the comment of a Pull Request when packages are being published
 
 It's worth mentioning that all of the default commands, along with some others are already added to the `package.json` scripts section.
 

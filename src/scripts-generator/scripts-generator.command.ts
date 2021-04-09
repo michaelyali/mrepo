@@ -17,7 +17,7 @@ enum AvailableCommands {
   RELEASE = 'release',
 }
 
-const RELEASE_SEMVER = ['patch', 'minor', 'major', 'prepatch', 'preminor', 'premajor', 'prerelease'];
+const RELEASE_SEMVER = ['patch', 'minor', 'major', 'prepatch', 'preminor', 'premajor', 'prerelease', 'select'];
 const RELEASE_SEMVER_STR = RELEASE_SEMVER.join(', ');
 
 export class ScriptsGeneratorCommand {
@@ -104,6 +104,7 @@ export class ScriptsGeneratorCommand {
       .option('--no-git-push', 'Skip git commit and push', false)
       .option('--no-changelog', 'Skip changelog generation', false)
       .option('--preid <value>', 'Prerelease identifier', 'alpha')
+      .option('--dist-tag <value>', 'Dist tag if Lerna version is "independent"', 'latest')
       .option('--force-publish', 'Force packages release', false)
       .description('Release package(s)', {
         semver: `Package version semver type. One of: ${RELEASE_SEMVER_STR}`,
@@ -246,6 +247,11 @@ export class ScriptsGeneratorCommand {
     function runRelease(semver: string, options?: any) {
       logger.info(AvailableCommands.RELEASE, 'Creating new release version(s)', emoji.get(':rocket:'));
 
+      const lernaFile = loadLernaFile();
+      const isIndependent = lernaFile.version === 'independent';
+      const isCustomVersion = semver === 'select';
+      const semverStr = isCustomVersion ? '' : semver;
+
       validateReleaseSemver(semver);
 
       if (options.gitPush) {
@@ -253,15 +259,19 @@ export class ScriptsGeneratorCommand {
       }
 
       const preid = semver.startsWith('pre') ? `--preid ${options.preid}` : '';
-      const withChangelog = options.changelog ? '--conventional-commits' : '';
+      const withChangelog = options.changelog && !isCustomVersion ? '--conventional-commits' : '';
       const forcePublish = options.forcePublish ? '--force-publish' : '';
-      const lernaVersionCmd = `npx lerna version ${semver} --no-git-tag-version ${withChangelog} ${preid} ${forcePublish}`;
+      const lernaVersionCmd = `npx lerna version ${semverStr} --no-git-tag-version ${withChangelog} ${preid} ${forcePublish}`;
 
       execSync(lernaVersionCmd, { stdio: 'inherit' });
 
-      const lernaFile = loadLernaFile();
-
-      execSync(`git add . && git commit -m "chore: release v${lernaFile.version}"`);
+      if (isIndependent) {
+        execSync(`npx json -I -f ${process.cwd()}/lerna.json -e "this.distTag='${options.distTag}'"`);
+        execSync(`git add . && git commit -m "chore: release with --dist-tag=${options.distTag}"`);
+      } else {
+        const updatedLernaFile = loadLernaFile();
+        execSync(`git add . && git commit -m "chore: release v${updatedLernaFile.version}"`);
+      }
 
       logger.info(
         AvailableCommands.RELEASE,

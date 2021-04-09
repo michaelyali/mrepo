@@ -1,7 +1,7 @@
 ## PR Checklist
 Please check if your PR fulfills the following requirements:
 
-- [ ] The commit message follows our guidelines: https://github.com/<%= scope %>/<%= monorepoName %>/blob/master/CONTRIBUTING.md
+- [ ] The commit message was made using `yarn commit_` command
 - [ ] Tests for the changes have been added (for bug fixes / features)
 - [ ] Docs have been added / updated (for bug fixes / features)
 
@@ -16,6 +16,8 @@ What kind of change does this PR introduce?
 [ ] Code style update (formatting, local variables)
 [ ] Refactoring (no functional changes, no api changes)
 [ ] Build related changes
+[ ] Tests
+[ ] Release
 [ ] CI related changes
 [ ] Other... Please describe:
 ```

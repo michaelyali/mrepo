@@ -3,10 +3,25 @@ import { existsSync, mkdirSync } from 'fs';
 import { join } from 'path';
 import * as color from 'chalk';
 import * as emoji from 'node-emoji';
-import { GITHUB_NODE_AUTH_TOKEN_NAME, PACKAGE_REGISTRY, PACKAGE_REGISTRY_URL } from '../constants';
+import {
+  GITHUB_NODE_AUTH_TOKEN_NAME,
+  LERNA_PACKAGES_VERSIONING,
+  PACKAGE_REGISTRY,
+  PACKAGE_REGISTRY_URL,
+} from '../constants';
 import { getParentProcessPassedOptions } from '../helpers';
 import { logger } from '../utils';
 import { IMonorepoGeneratorAnswers, IParentCommandPassedOptions } from './interfaces';
+
+const LERNA_PACKAGES_VERSIONING_CHOICES = [
+  {
+    name: LERNA_PACKAGES_VERSIONING.common,
+    checked: true,
+  },
+  {
+    name: LERNA_PACKAGES_VERSIONING.independent,
+  },
+];
 
 const PACKAGE_REGISTRY_CHOICES = [
   {
@@ -35,6 +50,7 @@ const defaultAnswers: IMonorepoGeneratorAnswers = {
   pgDefaultsAuthorEmail: '',
   currentYear: new Date().getFullYear(),
   packageRegistry: PACKAGE_REGISTRY.github,
+  lernaPackagesVersioning: LERNA_PACKAGES_VERSIONING.common,
   shouldGeneratePackage: false,
   firstPackageName: '',
   registryUrl: PACKAGE_REGISTRY_URL.github,
@@ -101,8 +117,15 @@ const result = {
     prompts.push({
       name: 'packageRegistry',
       type: 'list',
-      message: 'Choose packages registry:',
+      message: 'Packages registry:',
       choices: PACKAGE_REGISTRY_CHOICES,
+    });
+
+    prompts.push({
+      name: 'lernaPackagesVersioning',
+      type: 'list',
+      message: 'Packages versioning:',
+      choices: LERNA_PACKAGES_VERSIONING_CHOICES,
     });
 
     if (!parentOptions.dryRun) {
@@ -135,6 +158,7 @@ const result = {
       this.answers.pgDefaultsAuthorName = defaultAnswers.pgDefaultsAuthorName;
       this.answers.pgDefaultsAuthorEmail = defaultAnswers.pgDefaultsAuthorEmail;
       this.answers.packageRegistry = defaultAnswers.packageRegistry;
+      this.answers.lernaPackagesVersioning = defaultAnswers.lernaPackagesVersioning;
       this.answers.shouldGeneratePackage = defaultAnswers.shouldGeneratePackage;
       this.answers.registryUrl = defaultAnswers.registryUrl;
       this.answers.githubNodeAuthTokenName = defaultAnswers.githubNodeAuthTokenName;
@@ -146,6 +170,10 @@ const result = {
       this.answers.packageRegistry === PACKAGE_REGISTRY.github
         ? GITHUB_NODE_AUTH_TOKEN_NAME.github
         : GITHUB_NODE_AUTH_TOKEN_NAME.npm;
+    this.answers.lernaPackagesVersioning =
+      this.answers.lernaPackagesVersioning === LERNA_PACKAGES_VERSIONING.independent
+        ? LERNA_PACKAGES_VERSIONING.independent
+        : '0.0.0';
 
     if (parentOptions.dryRun) {
       return [];
@@ -201,7 +229,9 @@ const result = {
 
           if (!parentOptions.skipGitCommit) {
             // initial commit
-            execSync(`cd ${monorepoPath} && git add . && git commit -m "chore: initial commit" --no-verify`);
+            execSync(
+              `cd ${monorepoPath} && git add . && git commit -m "chore: initial commit" --no-verify && git tag v0.0.0`,
+            );
           }
         }
       }
