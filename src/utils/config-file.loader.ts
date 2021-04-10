@@ -14,6 +14,7 @@ export function loadConfigFile(): IMrepoConfigFile {
 
 export function loadLernaFile(): any {
   const lernaFilePath = join(process.cwd(), `./lerna.json`);
+  delete require.cache[lernaFilePath];
   return safeRequire(lernaFilePath);
 }
 
