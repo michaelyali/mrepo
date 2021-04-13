@@ -1,1 +1,1 @@
-# Alloyify <%= packageName %>
+# @<%= scope %>/<%= packageName %>
