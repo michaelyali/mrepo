@@ -61,6 +61,7 @@ export class ScriptsGeneratorCommand {
         package: `Package name, if specified. One of: ${packagesNamesStr}`,
       })
       .option('-f, --folder <value>', 'Tests folder', workspaceName)
+      .option('-s, --suite <value>', 'Test suite', '')
       .option('-c, --config <value>', 'Jest config file', 'jest.config.js')
       .option('--coverage', 'Run with coverage', false)
       .option('--verbose', 'Run verbose', false)
@@ -168,7 +169,9 @@ export class ScriptsGeneratorCommand {
       const config = `-c=${options.config}`;
       const coverage = options.coverage ? '--coverage' : '';
       const verbose = options.verbose ? '--verbose' : '';
+      const suite = options.suite ? options.suite : '';
       let where = '';
+      let collectCoverageFrom = ''
 
       if (!packageName) {
         logger.info(AvailableCommands.TEST, 'Running tests', emoji.get(':zap:'));
@@ -178,10 +181,14 @@ export class ScriptsGeneratorCommand {
         validatePackageExist(packageName, packagesNames);
         logger.info(AvailableCommands.TEST, `Running tests for ${color.italic.bold(packageName)}`, emoji.get(':zap:'));
 
-        where = `${options.folder}/${packageName}/`;
+        where = `${options.folder}/${packageName}/${suite}`;
+
+        if (coverage) {
+          collectCoverageFrom = `--collectCoverageFrom='["${options.folder}/${packageName}/**/*.ts","!${options.folder}/${packageName}/**/*.d.ts","!${options.folder}/${packageName}/**/index.ts","!${options.folder}/${packageName}/**/*.interface.ts","!**/node_modules/**","!**/__stubs__/**","!**/__fixture__/**","!integration/*"]'`
+        }
       }
 
-      const cmd = `npx jest --runInBand --detectOpenHandles ${config} ${where} ${coverage} ${verbose}`;
+      const cmd = `npx jest --runInBand --detectOpenHandles ${config} ${where} ${coverage} ${collectCoverageFrom} ${verbose}`;
       execSync(cmd, { stdio: 'inherit' });
 
       logger.info(AvailableCommands.TEST, `Running tests ${color.green('done')}`, emoji.get(':ok_hand:'));
