@@ -174,6 +174,7 @@ Arguments:
 
 Options:
   -f, --folder <value>  Tests folder (default: "packages")
+  -s, --suite <value>   Suite path to run
   -c, --config <value>  Jest config file (default: "jest.config.js")
   --coverage            Run with coverage (default: false)
   --verbose             Run verbose (default: false)
