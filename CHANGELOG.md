@@ -1,7 +1,8 @@
-## 0.4.0 (2021-07-20)
+## <small>0.4.1 (2021-08-19)</small>
 
 * feat(lerna): added independent packages versioning support ([56dec71](https://github.com/zMotivat0r/mrepo/commit/56dec71))
 * feat(scripts-generator): added running test suite ([bc22dfc](https://github.com/zMotivat0r/mrepo/commit/bc22dfc))
+* feat(scripts): added addCollectCoverageFrom option to test command ([1179cc8](https://github.com/zMotivat0r/mrepo/commit/1179cc8))
 * chore: release 0.1.8 ([141b85c](https://github.com/zMotivat0r/mrepo/commit/141b85c))
 * chore: release 0.1.9 ([432c10b](https://github.com/zMotivat0r/mrepo/commit/432c10b))
 * chore: release 0.2.0 ([7b8ba31](https://github.com/zMotivat0r/mrepo/commit/7b8ba31))
@@ -17,6 +18,7 @@
 * chore: release 0.3.1 ([e8ff034](https://github.com/zMotivat0r/mrepo/commit/e8ff034))
 * chore: release 0.3.2 ([3e18e36](https://github.com/zMotivat0r/mrepo/commit/3e18e36))
 * chore: release 0.3.3 ([b02191b](https://github.com/zMotivat0r/mrepo/commit/b02191b))
+* chore: release 0.4.0 ([c02fce2](https://github.com/zMotivat0r/mrepo/commit/c02fce2))
 * chore(github): added PR and issues templates ([ef40386](https://github.com/zMotivat0r/mrepo/commit/ef40386))
 * fix: updated mrepo version ([b350143](https://github.com/zMotivat0r/mrepo/commit/b350143))
 * fix(monorepo-generator): updated mrepo version ([89cb302](https://github.com/zMotivat0r/mrepo/commit/89cb302))
