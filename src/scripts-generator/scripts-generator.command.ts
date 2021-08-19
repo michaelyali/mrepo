@@ -64,6 +64,7 @@ export class ScriptsGeneratorCommand {
       .option('-s, --suite <value>', 'Test suite', '')
       .option('-c, --config <value>', 'Jest config file', 'jest.config.js')
       .option('--coverage', 'Run with coverage', false)
+      .option('--addCollectCoverageFrom <value>', 'Add collect coverage rules to defaults', '')
       .option('--verbose', 'Run verbose', false)
       .description('Test package(s)', {
         package: `Package name, if specified. One of: ${packagesNamesStr}`,
@@ -171,7 +172,7 @@ export class ScriptsGeneratorCommand {
       const verbose = options.verbose ? '--verbose' : '';
       const suite = options.suite ? options.suite : '';
       let where = '';
-      let collectCoverageFrom = ''
+      let collectCoverageFrom = '';
 
       if (!packageName) {
         logger.info(AvailableCommands.TEST, 'Running tests', emoji.get(':zap:'));
@@ -184,7 +185,14 @@ export class ScriptsGeneratorCommand {
         where = `${options.folder}/${packageName}/${suite}`;
 
         if (coverage) {
-          collectCoverageFrom = `--collectCoverageFrom='["${options.folder}/${packageName}/**/*.ts","!${options.folder}/${packageName}/**/*.d.ts","!${options.folder}/${packageName}/**/index.ts","!${options.folder}/${packageName}/**/*.interface.ts","!**/node_modules/**","!**/__stubs__/**","!**/__fixture__/**","!integration/*"]'`
+          const addToRules = options.addCollectCoverageFrom ? options.addCollectCoverageFrom : '';
+          collectCoverageFrom = `--collectCoverageFrom='["${options.folder}/${packageName}/**/*.ts","!${
+            options.folder
+          }/${packageName}/**/*.d.ts","!${options.folder}/${packageName}/**/index.ts","!${
+            options.folder
+          }/${packageName}/**/*.interface.ts","!**/node_modules/**","!**/__stubs__/**","!**/__fixture__/**","!integration/*"${
+            addToRules ? ',"' + addToRules.split(',').join('","') + '"' : ''
+          }]'`;
         }
       }
 
