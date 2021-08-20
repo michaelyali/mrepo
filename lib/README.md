@@ -235,6 +235,101 @@ $ mrepo unlink
 $ mrepo unlink packageName
 ```
 
+### mrepo digest
+
+_Install or create symlinks from mrepos to local target repositories._
+
+_Info:_
+
+```shell
+mrepo digest|d [options] [from] [to]
+
+Arguments:
+  from                      Mrepo names from the digest config file, comma-separated (optional)
+  to                        Target names from the digest config file, comma-separated (optional)
+
+Options:
+  -c, --config <value>      Config file name or path (optional) (default: "mrepo-digest.json")
+  -m, --mode <value>        Digest mode. One of ln, install. (optional)
+  -p, --packages <value>    Mrepo packages to digest, comma-separated (optional)
+  --installVersion <value>  Install packages with version
+  --quiet                   Run quietly (default: false)
+  -h, --help  display info
+```
+
+_Usage:_
+
+1. Create a config json (default name "mrepo-digest.json") and place it somewhere in your system.
+
+_Example config:_
+
+```json
+{
+  "paths": [
+    {
+      "name": "first",
+      "path": "/some/path/to/first"
+    },
+    {
+      "name": "second",
+      "path": "/some/path/to/second"
+    },
+    {
+      "name": "third",
+      "path": "/some/path/to/third"
+    }
+  ],
+  "mrepos": [
+    {
+      "name": "first",
+      "defaultPackages": ["one-package", "another-cool-package"],
+      "targets": [
+        {
+          "name": "second",
+          "packages": ["awesome-package"]
+        },
+        {
+          "name": "third"
+        }
+      ]
+    },
+    {
+      "name": "second",
+      "targets": [
+        {
+          "name": "third",
+          "packages": ["from-second-package"],
+          "noDefaultPackages": true,
+          "mode": "install"
+        }
+      ]
+    }
+  ],
+  "targets": [
+    {
+      "name": "second",
+      "installExec": "yarn add -W"
+    },
+    {
+      "name": "third",
+      "installExec": "npm i"
+    }
+  ],
+  "mode": "ln"
+}
+```
+
+In this example `first` and `second` are both `mrepo` generated monorepositories, where `second` depends on `first` (e.g. one has only public packages, another has only private packages under the same npm scope) and the `third` is just another node project wich depends on packages from both those mrepos.
+
+`mrepos.defaultPackages` and `mrepos.targets.packages` are merged (`mrepos.targets.noDefaultPackages` prevents using default packages) . Can be overridden by using `--packages` option.
+
+`mode` and `mrepos.targets.mode` have two values: `ln` - create symbolic links for packages from mrepo, `install` - install packages. Can be overridden by using `--mode` option.
+
+```shell
+$ mrepo digest
+$ mrepo digest -c another-config.json first third --mode install
+```
+
 ### mrepo release
 
 _Start release new version: bump package(s) version, generate changelog, git commit and push._

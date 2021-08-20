@@ -20,7 +20,7 @@ enum AvailableCommands {
 const RELEASE_SEMVER = ['patch', 'minor', 'major', 'prepatch', 'preminor', 'premajor', 'prerelease', 'select'];
 const RELEASE_SEMVER_STR = RELEASE_SEMVER.join(', ');
 
-export class ScriptsGeneratorCommand {
+export class MainCommands {
   static load(program: CommanderStatic['program'], configFile: IMrepoConfigFile) {
     const packagesNames = configFile.workspace.packages.map((p) => p.name);
     const packagesNamesStr = packagesNames.join(', ');
