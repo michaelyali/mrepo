@@ -7,8 +7,8 @@ import { CONFIG_FILE_NAME } from '../constants';
 import { IMrepoConfigFile } from '../interfaces';
 import { logger } from '../utils';
 
-export function loadConfigFile(): IMrepoConfigFile {
-  const configFilePath = join(process.cwd(), `./${CONFIG_FILE_NAME}`);
+export function loadConfigFile(path?: string): IMrepoConfigFile {
+  const configFilePath = join(path ? path : process.cwd(), `./${CONFIG_FILE_NAME}`);
   return safeRequire(configFilePath);
 }
 
@@ -32,6 +32,7 @@ export function validateConfigFile(configFile: IMrepoConfigFile) {
   }
 
   const ajv = new Ajv();
+
   const schema = {
     type: 'object',
     properties: {

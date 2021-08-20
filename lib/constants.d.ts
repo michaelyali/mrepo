@@ -1,5 +1,6 @@
 export declare const CMD = "mrepo";
 export declare const CONFIG_FILE_NAME: string;
+export declare const DIGEST_CONFIG_FILE_NAME: string;
 export declare const PACKAGE_GENERATOR_PASSED_OPTIONS_ENV_VAR = "PACKAGE_GENERATOR_PASSED_OPTIONS";
 export declare enum LERNA_PACKAGES_VERSIONING {
     independent = "independent",
@@ -17,3 +18,12 @@ export declare enum GITHUB_NODE_AUTH_TOKEN_NAME {
     github = "GITHUB_TOKEN",
     npm = "NPM_TOKEN"
 }
+export declare enum DIGEST_MODE {
+    LINK = "ln",
+    INSTALL = "install"
+}
+export declare enum DIGEST_MODE_DISPLAY {
+    'ln' = "symlink",
+    'install' = "install"
+}
+export declare const DIGEST_MODE_LIST: DIGEST_MODE[];
