@@ -1,4 +1,4 @@
-export function loadPackageJsonVersion(): string {
-  const packageJson = require('../package');
+export function loadPackageJsonVersion(path?: string): string {
+  const packageJson = require(path ? path : '../../package');
   return packageJson.version;
 }
