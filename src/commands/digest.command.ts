@@ -130,7 +130,7 @@ export class DigestCommand {
         const version = options.withVersion
           ? options.withVersion
           : options.withLocalVersions
-          ? loadPackageJsonVersion(join(mrepoPath.path, mrepoConfig.workspace.name, p, 'package'))
+          ? loadPackageJsonVersion(join(mrepoPath.path, mrepoConfig.workspace.name, p, 'package.json'))
           : '';
 
         return `@${mrepoConfig.workspace.scope}/${p}${version ? '@' + version : ''}`;
