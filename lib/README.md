@@ -55,6 +55,7 @@ $ npm i @zmotivat0r/mrepo -g
 - [mrepo test](#mrepo-test)
 - [mrepo link](#mrepo-link)
 - [mrepo unlink](#mrepo-unlink)
+- [mrepo digest](#mrepo-digest)
 - [mrepo release](#mrepo-release)
   - [release flow](#release-flow)
 
@@ -252,8 +253,9 @@ Options:
   -c, --config <value>      Config file name or path (optional) (default: "mrepo-digest.json")
   -m, --mode <value>        Digest mode. One of ln, install. (optional)
   -p, --packages <value>    Mrepo packages to digest, comma-separated (optional)
-  --installVersion <value>  Install packages with version
-  --quiet                   Run quietly (default: false)
+  --withVersion <value>     Install packages with version (optional)
+  --withLocalVersions       Install packages with their local versions (optional) (default: false)
+  --quiet                   Run quietly (optional) (default: false)
   -h, --help  display info
 ```
 

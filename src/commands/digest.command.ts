@@ -1,5 +1,4 @@
 import { isArrayFull, isIn } from '@nestled/util';
-import * as color from 'chalk';
 import { execSync } from 'child_process';
 import { CommanderStatic } from 'commander';
 import * as emoji from 'node-emoji';
@@ -20,7 +19,7 @@ import {
   IMrepoDigestConfigFileMrepoTarget,
   IMrepoDigestConfigFileTarget,
 } from '../interfaces';
-import { loadConfigFile, loadDigestConfigFile, logger } from '../utils';
+import { loadConfigFile, loadDigestConfigFile, loadPackageJsonVersion, logger } from '../utils';
 
 enum AvailableCommands {
   DIGEST = 'digest',
@@ -30,7 +29,8 @@ interface DigestCommandOptions {
   config: string;
   mode: DIGEST_MODE;
   packages?: string;
-  installVersion?: string;
+  withVersion?: string;
+  withLocalVersions?: boolean;
   quiet?: boolean;
 }
 
@@ -47,8 +47,9 @@ export class DigestCommand {
       .option('-c, --config <value>', 'Config file name or path (optional)', DIGEST_CONFIG_FILE_NAME)
       .option('-m, --mode <value>', `Digest mode. One of ${DIGEST_MODE_LIST.join(', ')}. (optional)`)
       .option('-p, --packages <value>', 'Mrepo packages to digest, comma-separated (optional)')
-      .option('--installVersion <value>', 'Install packages with version')
-      .option('--quiet', 'Run quietly', false)
+      .option('--withVersion <value>', 'Install packages with version (optional)')
+      .option('--withLocalVersions', 'Install packages with their local versions (optional)', false)
+      .option('--quiet', 'Run quietly (optional)', false)
       .description('Digest packages from mrepos to target repositories', {
         from: 'Mrepo names from the digest config file, comma-separated (optional)',
         to: 'Target names from the digest config file, comma-separated (optional)',
@@ -75,7 +76,7 @@ export class DigestCommand {
             const mode = this.getMode(config, mrepoTarget, options);
             switch (mode) {
               case DIGEST_MODE.INSTALL:
-                this.runInstall(mrepoConfig, targetPath, target, digestPackages, options);
+                this.runInstall(mrepoConfig, mrepoPath, targetPath, target, digestPackages, options);
                 break;
 
               case DIGEST_MODE.LINK:
@@ -116,6 +117,7 @@ export class DigestCommand {
 
   static runInstall(
     mrepoConfig: IMrepoConfigFile,
+    mrepoPath: IMrepoDigestConfigFilePath,
     targetPath: IMrepoDigestConfigFilePath,
     target: IMrepoDigestConfigFileTarget,
     digestPackages: string[],
@@ -124,7 +126,15 @@ export class DigestCommand {
     this.removeFromNodeModules(mrepoConfig, targetPath, digestPackages);
 
     const packagesStr = digestPackages
-      .map((p) => `@${mrepoConfig.workspace.scope}/${p}${options.installVersion ? '@' + options.installVersion : ''}`)
+      .map((p) => {
+        const version = options.withVersion
+          ? options.withVersion
+          : options.withLocalVersions
+          ? loadPackageJsonVersion(join(mrepoPath.path, mrepoConfig.workspace.name, p, 'package'))
+          : '';
+
+        return `@${mrepoConfig.workspace.scope}/${p}${version ? '@' + version : ''}`;
+      })
       .join(' ');
 
     const cmd = `cd ${targetPath.path} && ${target.installExec} ${packagesStr}`;

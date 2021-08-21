@@ -1,1 +1,1 @@
-export declare function loadPackageJsonVersion(): string;
+export declare function loadPackageJsonVersion(path?: string): string;
