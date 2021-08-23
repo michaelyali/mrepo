@@ -1,4 +1,4 @@
-## <small>0.5.1 (2021-08-21)</small>
+## <small>0.5.2 (2021-08-23)</small>
 
 * fix: updated mrepo version ([b350143](https://github.com/zMotivat0r/mrepo/commit/b350143))
 * fix(digest): added --withLocalVersions option ([13dad26](https://github.com/zMotivat0r/mrepo/commit/13dad26))
@@ -10,6 +10,7 @@
 * fix(package-generator): readme template ([36995cc](https://github.com/zMotivat0r/mrepo/commit/36995cc))
 * fix(templates): up mrepo version ([873762d](https://github.com/zMotivat0r/mrepo/commit/873762d))
 * fix(utils): fixed lerna json reloading ([c7b2b7b](https://github.com/zMotivat0r/mrepo/commit/c7b2b7b))
+* fix(utils): package version loader ([4faadcf](https://github.com/zMotivat0r/mrepo/commit/4faadcf))
 * chore: release 0.1.8 ([141b85c](https://github.com/zMotivat0r/mrepo/commit/141b85c))
 * chore: release 0.1.9 ([432c10b](https://github.com/zMotivat0r/mrepo/commit/432c10b))
 * chore: release 0.2.0 ([7b8ba31](https://github.com/zMotivat0r/mrepo/commit/7b8ba31))
@@ -28,6 +29,7 @@
 * chore: release 0.4.0 ([c02fce2](https://github.com/zMotivat0r/mrepo/commit/c02fce2))
 * chore: release 0.4.1 ([c9c95fb](https://github.com/zMotivat0r/mrepo/commit/c9c95fb))
 * chore: release 0.5.0 ([790ce23](https://github.com/zMotivat0r/mrepo/commit/790ce23))
+* chore: release 0.5.1 ([51d13d2](https://github.com/zMotivat0r/mrepo/commit/51d13d2))
 * chore(github): added PR and issues templates ([ef40386](https://github.com/zMotivat0r/mrepo/commit/ef40386))
 * feat(lerna): added independent packages versioning support ([56dec71](https://github.com/zMotivat0r/mrepo/commit/56dec71))
 * feat(scripts-generator): added running test suite ([bc22dfc](https://github.com/zMotivat0r/mrepo/commit/bc22dfc))
