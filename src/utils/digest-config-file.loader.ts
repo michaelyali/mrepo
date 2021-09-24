@@ -3,8 +3,7 @@ import Ajv from 'ajv';
 import * as color from 'chalk';
 import * as findConfig from 'find-config';
 import * as emoji from 'node-emoji';
-import { join } from 'path';
-import { DIGEST_CONFIG_FILE_NAME, DIGEST_MODE, DIGEST_MODE_LIST } from '../constants';
+import { DIGEST_CONFIG_FILE_NAME, DIGEST_MODE_LIST } from '../constants';
 import { IMrepoDigestConfigFile } from '../interfaces';
 import { logger } from '../utils';
 

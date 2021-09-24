@@ -20,10 +20,12 @@ export declare enum GITHUB_NODE_AUTH_TOKEN_NAME {
 }
 export declare enum DIGEST_MODE {
     LINK = "ln",
-    INSTALL = "install"
+    INSTALL = "install",
+    COPY = "copy"
 }
 export declare enum DIGEST_MODE_DISPLAY {
     'ln' = "symlink",
-    'install' = "install"
+    'install' = "install",
+    'copy' = "copy"
 }
 export declare const DIGEST_MODE_LIST: DIGEST_MODE[];
