@@ -251,7 +251,7 @@ Arguments:
 
 Options:
   -c, --config <value>      Config file name or path (optional) (default: "mrepo-digest.json")
-  -m, --mode <value>        Digest mode. One of ln, install. (optional)
+  -m, --mode <value>        Digest mode. One of ln, install, copy. (optional)
   -p, --packages <value>    Mrepo packages to digest, comma-separated (optional)
   --withVersion <value>     Install packages with version (optional)
   --withLocalVersions       Install packages with their local versions (optional) (default: false)
@@ -325,7 +325,7 @@ In this example `first` and `second` are both `mrepo` generated monorepositories
 
 `mrepos.defaultPackages` and `mrepos.targets.packages` are merged (`mrepos.targets.noDefaultPackages` prevents using default packages) . Can be overridden by using `--packages` option.
 
-`mode` and `mrepos.targets.mode` have two values: `ln` - create symbolic links for packages from mrepo, `install` - install packages. Can be overridden by using `--mode` option.
+`mode` and `mrepos.targets.mode` have two values: `ln` - create symbolic links for packages from mrepo, `install` - install packages, `copy` - copy lib folders to targets. Can be overridden by using `--mode` option.
 
 ```shell
 $ mrepo digest

@@ -83,6 +83,8 @@ export class DigestCommand {
                 await this.runSymlink(mrepoConfig, mrepoPath, targetPath, digestPackages);
                 break;
 
+              case DIGEST_MODE.COPY:
+                await this.runCopy(mrepoConfig, mrepoPath, targetPath, digestPackages, options);
               default:
                 break;
             }
@@ -105,9 +107,10 @@ export class DigestCommand {
     mrepoConfig: IMrepoConfigFile,
     targetPath: IMrepoDigestConfigFilePath,
     digestPackages: string[],
+    lib = false,
   ): void {
     const packagesStr = digestPackages
-      .map((p) => join(targetPath.path, 'node_modules', `@${mrepoConfig.workspace.scope}`, p))
+      .map((p) => join(targetPath.path, 'node_modules', `@${mrepoConfig.workspace.scope}`, p, lib ? 'lib' : ''))
       .join(' ');
 
     execSync(`npx rimraf ${packagesStr}`, {
@@ -145,6 +148,8 @@ export class DigestCommand {
 
     execSync(cmd, {
       stdio: options.quiet ? 'ignore' : 'inherit',
+      shell: '/bin/bash',
+      env: process.env,
     });
   }
 
@@ -161,6 +166,27 @@ export class DigestCommand {
       const destPath = join(targetPath.path, 'node_modules', `@${mrepoConfig.workspace.scope}`, digestPackage);
 
       await symlinkDir(sourcePath, destPath);
+    }
+  }
+
+  static async runCopy(
+    mrepoConfig: IMrepoConfigFile,
+    mrepoPath: IMrepoDigestConfigFilePath,
+    targetPath: IMrepoDigestConfigFilePath,
+    digestPackages: string[],
+    options: DigestCommandOptions,
+  ): Promise<void> {
+    this.removeFromNodeModules(mrepoConfig, targetPath, digestPackages, true);
+
+    for (const digestPackage of digestPackages) {
+      const sourcePath = join(mrepoPath.path, mrepoConfig.workspace.name, digestPackage, 'lib', '**', '*');
+      const destPath = join(targetPath.path, 'node_modules', `@${mrepoConfig.workspace.scope}`, digestPackage, 'lib');
+
+      execSync(`npx cpx "${sourcePath}" "${destPath}"`, {
+        stdio: options.quiet ? 'ignore' : 'inherit',
+        shell: '/bin/bash',
+        env: process.env,
+      });
     }
   }
 

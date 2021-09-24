@@ -21,9 +21,11 @@ export enum GITHUB_NODE_AUTH_TOKEN_NAME {
 export enum DIGEST_MODE {
   LINK = 'ln',
   INSTALL = 'install',
+  COPY = 'copy',
 }
 export enum DIGEST_MODE_DISPLAY {
   'ln' = 'symlink',
   'install' = 'install',
+  'copy' = 'copy',
 }
 export const DIGEST_MODE_LIST = Object.values(DIGEST_MODE);

@@ -57,6 +57,7 @@
     "ajv": "7.2.1",
     "chalk": "4.1.0",
     "commander": "7.1.0",
+    "cpx": "1.5.0",
     "current-git-branch": "1.1.0",
     "dashify": "2.0.0",
     "find-config": "1.0.0",
