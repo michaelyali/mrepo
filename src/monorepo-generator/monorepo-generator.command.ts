@@ -2,6 +2,7 @@ import * as color from 'chalk';
 import { execSync } from 'child_process';
 import { CommanderStatic } from 'commander';
 import * as emoji from 'node-emoji';
+import { PACKAGE_GENERATOR_PASSED_OPTIONS_ENV_VAR } from '../constants';
 import { createChildProcessPassedOptionsString } from '../helpers';
 import { logger } from '../utils';
 import { IParentCommandPassedOptions } from './interfaces';
@@ -47,7 +48,11 @@ export class MonorepoGeneratorCommand {
         skipInstall: options.skipInstall,
       });
 
-      execSync(`${envVar} npx sao ${__dirname}`, { stdio: 'inherit' });
+      execSync(`npx sao ${__dirname}`, {
+        stdio: 'inherit',
+        shell: '/bin/bash',
+        env: { ...process.env, [PACKAGE_GENERATOR_PASSED_OPTIONS_ENV_VAR]: envVar },
+      });
       logger.info(AvailableCommands.NEW, `New monorepo has been ${color.green('created')}`, emoji.get(':ok_hand:'));
     }
   }

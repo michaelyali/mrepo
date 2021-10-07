@@ -2,7 +2,12 @@ import { isArrayFull, isUndefined } from '@nestled/util';
 import { execSync } from 'child_process';
 import { existsSync } from 'fs';
 import { join } from 'path';
-import { CONFIG_FILE_NAME, PACKAGE_REGISTRY, PACKAGE_REGISTRY_URL } from '../constants';
+import {
+  CONFIG_FILE_NAME,
+  PACKAGE_REGISTRY,
+  PACKAGE_REGISTRY_URL,
+  PACKAGE_GENERATOR_PASSED_OPTIONS_ENV_VAR,
+} from '../constants';
 import { IMrepoConfigFile } from '../interfaces';
 import { createChildProcessPassedOptionsString, getParentProcessPassedOptions } from '../helpers';
 import { loadConfigFile, loadRootPackageJson, logger } from '../utils';
@@ -249,7 +254,11 @@ const result = {
           const path = join(cwd, config.path);
           const envVar = createChildProcessPassedOptionsString(this.answers);
           logger.info('cli', `Running '${config.name}' sub-generator`);
-          execSync(`${envVar} sao ${path}`, { stdio: 'inherit' });
+          execSync(`sao ${path}`, {
+            stdio: 'inherit',
+            shell: '/bin/bash',
+            env: { ...process.env, [PACKAGE_GENERATOR_PASSED_OPTIONS_ENV_VAR]: envVar },
+          });
         });
       }
 
