@@ -1,9 +1,7 @@
 import { PACKAGE_GENERATOR_PASSED_OPTIONS_ENV_VAR } from '../constants';
 
 export function createChildProcessPassedOptionsString<T>(answers: T): string {
-  const base64 = Buffer.from(JSON.stringify(answers), 'utf-8').toString('base64');
-
-  return `${PACKAGE_GENERATOR_PASSED_OPTIONS_ENV_VAR}="${base64}"`;
+  return Buffer.from(JSON.stringify(answers), 'utf-8').toString('base64');
 }
 
 /**

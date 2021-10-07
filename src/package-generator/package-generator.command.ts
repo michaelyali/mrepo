@@ -2,7 +2,7 @@ import * as color from 'chalk';
 import { execSync } from 'child_process';
 import { CommanderStatic } from 'commander';
 import * as emoji from 'node-emoji';
-import { CONFIG_FILE_NAME } from '../constants';
+import { CONFIG_FILE_NAME, PACKAGE_GENERATOR_PASSED_OPTIONS_ENV_VAR } from '../constants';
 import { IMrepoConfigFile } from '../interfaces';
 import { createChildProcessPassedOptionsString } from '../helpers';
 import { logger } from '../utils';
@@ -47,7 +47,11 @@ export class PackageGeneratorCommand {
         dependents,
       });
 
-      execSync(`${envVar} sao ${__dirname}`, { stdio: 'inherit' });
+      execSync(`sao ${__dirname}`, {
+        stdio: 'inherit',
+        shell: '/bin/bash',
+        env: { ...process.env, [PACKAGE_GENERATOR_PASSED_OPTIONS_ENV_VAR]: envVar },
+      });
       logger.info(AvailableCommands.GENERATE, `Generating ${color.green('done')}`, emoji.get(':ok_hand:'));
     }
 
