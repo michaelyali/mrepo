@@ -30,6 +30,7 @@ interface DigestCommandOptions {
   mode: DIGEST_MODE;
   packages?: string;
   withVersion?: string;
+  distTag?: string;
   withLocalVersions?: boolean;
   quiet?: boolean;
 }
@@ -48,6 +49,7 @@ export class DigestCommand {
       .option('-m, --mode <value>', `Digest mode. One of ${DIGEST_MODE_LIST.join(', ')}. (optional)`)
       .option('-p, --packages <value>', 'Mrepo packages to digest, comma-separated (optional)')
       .option('--withVersion <value>', 'Install packages with version (optional)')
+      .option('--distTag <value>', 'Install packages with dist tag (optional)')
       .option('--withLocalVersions', 'Install packages with their local versions (optional)', false)
       .option('--quiet', 'Run quietly (optional)', false)
       .description('Digest packages from mrepos to target repositories', {
@@ -130,7 +132,9 @@ export class DigestCommand {
 
     const packagesStr = digestPackages
       .map((p) => {
-        const version = options.withVersion
+        const version = options.distTag
+          ? options.distTag
+          : options.withVersion
           ? options.withVersion
           : options.withLocalVersions
           ? loadPackageJsonVersion(join(mrepoPath.path, mrepoConfig.workspace.name, p, 'package.json'))

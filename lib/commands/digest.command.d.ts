@@ -6,6 +6,7 @@ interface DigestCommandOptions {
     mode: DIGEST_MODE;
     packages?: string;
     withVersion?: string;
+    distTag?: string;
     withLocalVersions?: boolean;
     quiet?: boolean;
 }
