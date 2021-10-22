@@ -1,5 +1,6 @@
-## 0.7.0 (2021-10-11)
+## <small>0.7.1-beta.1 (2021-10-22)</small>
 
+* feat(build): use build cache ([39c0449](https://github.com/zMotivat0r/mrepo/commit/39c0449))
 * feat(digest): added distTag option to install ([a3659f3](https://github.com/zMotivat0r/mrepo/commit/a3659f3))
 * feat(lerna): added independent packages versioning support ([56dec71](https://github.com/zMotivat0r/mrepo/commit/56dec71))
 * feat(scripts-generator): added running test suite ([bc22dfc](https://github.com/zMotivat0r/mrepo/commit/bc22dfc))
@@ -28,6 +29,7 @@
 * chore: release 0.5.2 ([98a52a8](https://github.com/zMotivat0r/mrepo/commit/98a52a8))
 * chore: release 0.6.0 ([4469ea0](https://github.com/zMotivat0r/mrepo/commit/4469ea0))
 * chore: release 0.6.1 ([c843693](https://github.com/zMotivat0r/mrepo/commit/c843693))
+* chore: release 0.7.0 ([bd2e56b](https://github.com/zMotivat0r/mrepo/commit/bd2e56b))
 * chore(github): added PR and issues templates ([ef40386](https://github.com/zMotivat0r/mrepo/commit/ef40386))
 * ci: updated PR template ([e249440](https://github.com/zMotivat0r/mrepo/commit/e249440))
 * ci: updated release action ([e9e59fc](https://github.com/zMotivat0r/mrepo/commit/e9e59fc))
