@@ -1,6 +1,7 @@
-## 0.8.0 (2021-10-22)
+## <small>0.8.1 (2021-10-22)</small>
 
 * fix: updated mrepo version ([b350143](https://github.com/zMotivat0r/mrepo/commit/b350143))
+* fix(build): cache checker ([e047bf3](https://github.com/zMotivat0r/mrepo/commit/e047bf3))
 * fix(build): fixed build all packages ([9649960](https://github.com/zMotivat0r/mrepo/commit/9649960))
 * fix(digest): added --withLocalVersions option ([13dad26](https://github.com/zMotivat0r/mrepo/commit/13dad26))
 * fix(digest): updated load package.json in install mode ([e3815f6](https://github.com/zMotivat0r/mrepo/commit/e3815f6))
@@ -37,6 +38,7 @@
 * chore: release 0.6.1 ([c843693](https://github.com/zMotivat0r/mrepo/commit/c843693))
 * chore: release 0.7.0 ([bd2e56b](https://github.com/zMotivat0r/mrepo/commit/bd2e56b))
 * chore: release 0.7.1-beta.1 ([f136953](https://github.com/zMotivat0r/mrepo/commit/f136953))
+* chore: release 0.8.0 ([1be14fa](https://github.com/zMotivat0r/mrepo/commit/1be14fa))
 * chore(github): added PR and issues templates ([ef40386](https://github.com/zMotivat0r/mrepo/commit/ef40386))
 * feat(build): use build cache ([39c0449](https://github.com/zMotivat0r/mrepo/commit/39c0449))
 * feat(digest): added distTag option to install ([a3659f3](https://github.com/zMotivat0r/mrepo/commit/a3659f3))
