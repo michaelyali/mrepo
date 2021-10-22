@@ -1,3 +1,4 @@
+import { isString } from '@nestled/util';
 import { hashElement } from 'folder-hash';
 import { ensureFile, readJson, writeJson } from 'fs-extra';
 import { join } from 'path';
@@ -12,7 +13,7 @@ export async function hasCached(workspaceName: string, packageName: string): Pro
   const paths = getPaths(workspaceName, packageName);
   const hashes = await getHashes(paths);
 
-  return savedCache.src === hashes.src && savedCache.lib === hashes.lib;
+  return savedCache.src === hashes.src && savedCache.lib === hashes.lib && isString(hashes.lib);
 }
 
 export async function saveCache(workspaceName: string, packageName: string) {
