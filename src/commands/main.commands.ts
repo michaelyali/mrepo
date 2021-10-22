@@ -147,13 +147,13 @@ export class MainCommands {
      */
     async function runBuild(packageName: string, useCache = true) {
       const exec = async (pName: string) => {
-        const hasCache = await hasCached(workspaceName, packageName);
+        const hasCache = await hasCached(workspaceName, pName);
 
         if (!useCache || !hasCache) {
           logger.info(AvailableCommands.BUILD, `Building ${color.italic.bold(pName)}`, emoji.get(':package:'));
           execSync(`npx lerna run build --scope @${scope}/${pName}`, { stdio: 'inherit' });
 
-          await saveCache(workspaceName, packageName);
+          await saveCache(workspaceName, pName);
         } else {
           logger.info(
             AvailableCommands.BUILD,
