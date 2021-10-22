@@ -1,6 +1,8 @@
 export const CMD = 'mrepo';
 export const CONFIG_FILE_NAME = `${CMD}.json`;
 export const DIGEST_CONFIG_FILE_NAME = `${CMD}-digest.json`;
+export const TMP_BUILDS_CACHE_FILE_NAME = 'builds.cache';
+export const TMP_FOLDER_NAME = '.mrepo';
 export const PACKAGE_GENERATOR_PASSED_OPTIONS_ENV_VAR = 'PACKAGE_GENERATOR_PASSED_OPTIONS';
 export enum LERNA_PACKAGES_VERSIONING {
   independent = 'independent',

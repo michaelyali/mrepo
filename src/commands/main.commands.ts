@@ -5,6 +5,7 @@ import { CommanderStatic } from 'commander';
 import * as getGitBranch from 'current-git-branch';
 import * as emoji from 'node-emoji';
 import { CONFIG_FILE_NAME } from '../constants';
+import { hasCached, saveCache } from '../helpers';
 import { IMrepoConfigFile } from '../interfaces';
 import { loadLernaFile, logger } from '../utils';
 
@@ -45,10 +46,11 @@ export class MainCommands {
       .command(AvailableCommands.BUILD)
       .alias('b')
       .arguments('[package]')
+      .option('--no-cache', 'Force build without cache comparison', false)
       .description('Build package(s)', {
         package: `Package name, if specified. One of: ${packagesNamesStr}`,
       })
-      .action((packageName: string) => runBuild(packageName));
+      .action(async (packageName: string, options: any) => runBuild(packageName, options.cache));
 
     /**
      * Test packages
@@ -143,16 +145,29 @@ export class MainCommands {
      * Run `build` command
      * @param packageName string
      */
-    function runBuild(packageName?: string) {
-      const exec = (pName: string) => {
-        logger.info(AvailableCommands.BUILD, `Building ${color.italic.bold(pName)}`, emoji.get(':package:'));
-        execSync(`npx lerna run build --scope @${scope}/${pName}`, { stdio: 'inherit' });
+    async function runBuild(packageName: string, useCache = true) {
+      const exec = async (pName: string) => {
+        const hasCache = await hasCached(workspaceName, packageName);
+
+        if (!useCache || !hasCache) {
+          logger.info(AvailableCommands.BUILD, `Building ${color.italic.bold(pName)}`, emoji.get(':package:'));
+          execSync(`npx lerna run build --scope @${scope}/${pName}`, { stdio: 'inherit' });
+
+          await saveCache(workspaceName, packageName);
+        } else {
+          logger.info(
+            AvailableCommands.BUILD,
+            `Package ${color.italic.bold(pName)} has been built already`,
+            emoji.get(':ok_hand:'),
+          );
+        }
       };
 
       if (!packageName) {
-        packagesNames.forEach((pName: string) => {
-          exec(pName);
-        });
+        for (let i = 0; i < packagesNames.length; i++) {
+          const pName = packagesNames[i];
+          await exec(pName);
+        }
       } else {
         validatePackageExist(packageName, packagesNames);
         exec(packageName);
@@ -206,8 +221,9 @@ export class MainCommands {
      * Run `link` command
      * @param packageName string
      * @param options object
+     * @param configFile: IMrepoConfigFile
      */
-    function runLink(packageName?: string, options?: any) {
+    function runLink(packageName: string, options: any) {
       const exec = (pName: string) => {
         logger.info(AvailableCommands.LINK, `Linking ${color.italic.bold(pName)}`, emoji.get(':loudspeaker:'));
         execSync(`cd ./${workspaceName}/${pName} && npm link`, { stdio: 'inherit' });
@@ -215,7 +231,7 @@ export class MainCommands {
 
       if (!packageName) {
         if (options.build) {
-          runBuild();
+          runBuild(undefined, false);
         }
 
         packagesNames.forEach((pName: string) => {
@@ -225,7 +241,7 @@ export class MainCommands {
         validatePackageExist(packageName, packagesNames);
 
         if (options.build) {
-          runBuild(packageName);
+          runBuild(packageName, false);
         }
 
         exec(packageName);
